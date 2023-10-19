@@ -9,8 +9,8 @@
     <button id="google-sign-in">Sign In with Google</button>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-app.js";
-        import { GoogleAuthProvider, getAuth, signInWithPopup } from "https://www.gstatic.com/firebasejs/9.0.2/firebase-auth.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+        import { GoogleAuthProvider, getAuth, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyADU9mE19sCAgybueA1CjB4pGMa7ALN0-M",
@@ -33,12 +33,13 @@
             .then(function(result) {
                 const user = result.user;
                 const userEmail = user.email;
-                console.log('Signed in as ' + user.displayName + ' (' + userEmail + ')');
                 
                 const allowedEmails = ["user1@example.com", "user2@example.com"];
                 if (allowedEmails.includes(userEmail)) {
-                    // The user is allowed to access the site.
-                    // You can redirect the user to the site or perform other actions.
+                    // Set a cookie to indicate successful sign-in
+                    document.cookie = "signed_in=true; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/";
+                    // Redirect the user to another page, e.g., the chat page.
+                    window.location.href = "index.html";
                 } else {
                     // The user is not allowed. Redirect them to another page.
                     window.location.href = "https://www.example.com";
@@ -51,3 +52,5 @@
     </script>
 </body>
 </html>
+
+
