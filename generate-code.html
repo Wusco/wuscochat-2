@@ -14,17 +14,17 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-        import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+        import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
 
         // Your Firebase config goes here
         const firebaseConfig = {
-            apiKey: "AIzaSyADU9mE19sCAgybueA1CjB4pGMa7ALN0-M",
-            authDomain: "wuscochat.firebaseapp.com",
-            databaseURL: "https://wuscochat-default-rtdb.firebaseio.com",
-            projectId: "wuscochat",
-            storageBucket: "wuscochat.appspot.com",
-            messagingSenderId: "1092324424182",
-            appId: "1:1092324424182:web:6c7e02de473063660e2fd7"
+           apiKey: "AIzaSyADU9mE19sCAgybueA1CjB4pGMa7ALN0-M",
+           authDomain: "wuscochat.firebaseapp.com",
+           databaseURL: "https://wuscochat-default-rtdb.firebaseio.com",
+           projectId: "wuscochat",
+           storageBucket: "wuscochat.appspot.com",
+           messagingSenderId: "1092324424182",
+           appId: "1:1092324424182:web:6c7e02de473063660e2fd7"
         };
 
         const app = initializeApp(firebaseConfig);
@@ -39,28 +39,13 @@
 
             // Check if the access code already exists
             const accessCodeRef = ref(db, "access-codes/" + accessCode);
-            get(accessCodeRef).then((snapshot) => {
-                if (snapshot.exists()) {
-                    const accessCodeData = snapshot.val();
-
-                    if (accessCodeData.status === "unused") {
-                        // Mark the access code as used in the database.
-                        const updateData = {};
-                        updateData[accessCodeRef] = { status: "used" };
-                        set(db.ref(), updateData)
-                            .then(() => {
-                                alert("Access code marked as used: " + accessCode);
-                            })
-                            .catch((error) => {
-                                alert("Error marking access code as used: " + error);
-                            });
-                    } else {
-                        alert("Access code is already used.");
-                    }
-                } else {
-                    alert("Access code does not exist.");
-                }
-            });
+            set(accessCodeRef, { status: "available" })
+                .then(() => {
+                    alert("Access code saved: " + accessCode);
+                })
+                .catch((error) => {
+                    alert("Error saving access code: " + error);
+                });
         });
     </script>
 </body>
