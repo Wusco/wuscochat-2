@@ -44,7 +44,7 @@
                 } else {
                     console.log('User email is not in the whitelist:', userEmail);
                     // The user is not allowed. Redirect them to another page.
-                    window.location.href = "https://www.example.com";
+                    window.location.replace("banned.html");
                 }
             })
             .catch(function(error) {
