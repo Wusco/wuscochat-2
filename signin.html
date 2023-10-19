@@ -51,14 +51,13 @@
 <body>
     <div class="container">
         <h1>Sign In</h1>
-        <p>Sign in with your Google account.</p>
-        <button id="google-sign-in">Sign In with Google</button>
+        <p>Sign in with an access code:</p>
+        <input type="text" id="access-code" placeholder="Enter access code">
+        <button id="submit-access-code">Submit</button>
     </div>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
-        import { GoogleAuthProvider, getAuth, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js";
-
+        // Firebase Realtime Database configuration
         const firebaseConfig = {
             apiKey: "AIzaSyADU9mE19sCAgybueA1CjB4pGMa7ALN0-M",
             authDomain: "wuscochat.firebaseapp.com",
@@ -69,35 +68,53 @@
             appId: "1:1092324424182:web:6c7e02de473063660e2fd7"
         };
 
+        // Initialize Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+        import { ref, get, set, push } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+
         const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const googleProvider = new GoogleAuthProvider();
-        
-        const googleSignInButton = document.getElementById('google-sign-in');
-        
-        googleSignInButton.addEventListener('click', function() {
-            signInWithPopup(auth, googleProvider)
-            .then(function(result) {
-                const user = result.user;
-                const userEmail = user.email;
-                
-                const allowedEmails = ["dolangavin448@gmail.com", "user2@example.com"];
-                if (allowedEmails.includes(userEmail)) {
-                    console.log('User email is in the whitelist:', userEmail);
-                    // Set a cookie to indicate successful sign-in
-                    document.cookie = "signed_in=true; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/";
-                    // Redirect the user to another page, e.g., the chat page.
-                    window.location.href = "index.html";
-                } else {
-                    console.log('User email is not in the whitelist:', userEmail);
-                    // The user is not allowed. Redirect them to another page.
-                    window.location.replace("./accessdenied.html");
-                }
-            })
-            .catch(function(error) {
-                console.error(error);
-            });
+        const db = getDatabase(app);
+
+        const submitAccessCodeButton = document.getElementById('submit-access-code');
+        const accessCodeInput = document.getElementById('access-code');
+
+        submitAccessCodeButton.addEventListener('click', () => {
+            const accessCode = accessCodeInput.value.trim();
+            if (accessCode) {
+                checkAccessCode(accessCode);
+            }
         });
+
+        function checkAccessCode(accessCode) {
+            const accessCodeRef = ref(db, "access-codes/" + accessCode);
+
+            get(accessCodeRef)
+                .then((snapshot) => {
+                    if (snapshot.exists()) {
+                        // The code exists in the database, allowing access
+                        console.log("Access granted!");
+
+                        // Remove the code from the "access-codes" section
+                        set(accessCodeRef, null);
+
+                        // Move it to a "used-codes" section (or any other structure you prefer)
+                        const usedCodeRef = ref(db, "used-codes/" + accessCode);
+                        set(usedCodeRef, true);
+
+                        // Set a cookie to indicate successful sign-in
+                        document.cookie = "signed_in=true; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/";
+
+                        // Redirect the user to another page, e.g., the chat page
+                        window.location.href = "index.html";
+                    } else {
+                        // The code does not exist, access denied
+                        console.log("Access denied.");
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error checking access code:", error);
+                });
+        }
     </script>
 </body>
 </html>
