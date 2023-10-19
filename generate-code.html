@@ -6,15 +6,17 @@
 <body>
     <h1>Generate Access Code</h1>
     <p>Generate a one-time access code to share with others.</p>
-    
+
     <form id="access-code-form">
         <input type="text" id="access-code" placeholder="Access Code" required>
         <button type="submit">Generate</button>
     </form>
 
-    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js"></script>
-    <script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+        import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+
+        // Your Firebase config goes here
         const firebaseConfig = {
             apiKey: "AIzaSyADU9mE19sCAgybueA1CjB4pGMa7ALN0-M",
             authDomain: "wuscochat.firebaseapp.com",
@@ -25,8 +27,8 @@
             appId: "1:1092324424182:web:6c7e02de473063660e2fd7"
         };
 
-        const app = firebase.initializeApp(firebaseConfig);
-        const database = firebase.database();
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
 
         const accessCodeForm = document.getElementById("access-code-form");
         const accessCodeInput = document.getElementById("access-code");
@@ -35,15 +37,28 @@
             e.preventDefault();
             const accessCode = accessCodeInput.value;
 
-            // Upload the access code to Firebase.
-            const accessCodeRef = database.ref("access-codes").child(accessCode);
-            accessCodeRef.set({
-                status: "unused",
-            }, (error) => {
-                if (error) {
-                    console.error("Error uploading access code:", error);
+            // Check if the access code already exists
+            const accessCodeRef = ref(db, "access-codes/" + accessCode);
+            get(accessCodeRef).then((snapshot) => {
+                if (snapshot.exists()) {
+                    const accessCodeData = snapshot.val();
+
+                    if (accessCodeData.status === "unused") {
+                        // Mark the access code as used in the database.
+                        const updateData = {};
+                        updateData[accessCodeRef] = { status: "used" };
+                        set(db.ref(), updateData)
+                            .then(() => {
+                                alert("Access code marked as used: " + accessCode);
+                            })
+                            .catch((error) => {
+                                alert("Error marking access code as used: " + error);
+                            });
+                    } else {
+                        alert("Access code is already used.");
+                    }
                 } else {
-                    console.log("Access code uploaded successfully:", accessCode);
+                    alert("Access code does not exist.");
                 }
             });
         });
