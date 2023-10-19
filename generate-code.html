@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Access Code Generator</title>
+</head>
+<body>
+    <h1>Access Code Generator</h1>
+    <p>Generate a one-time access code:</p>
+    <button id="generate-access-code">Generate Code</button>
+
+    <script type="module">
+        // Firebase Realtime Database configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyADU9mE19sCAgybueA1CjB4pGMa7ALN0-M",
+            authDomain: "wuscochat.firebaseapp.com",
+            databaseURL: "https://wuscochat-default-rtdb.firebaseio.com",
+            projectId: "wuscochat",
+            storageBucket: "wuscochat.appspot.com",
+            messagingSenderId: "1092324424182",
+            appId: "1:1092324424182:web:6c7e02de473063660e2fd7"
+        };
+
+        // Initialize Firebase
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
+        import { ref, push } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        const generateAccessCodeButton = document.getElementById('generate-access-code');
+
+        generateAccessCodeButton.addEventListener('click', () => {
+            const accessCode = generateRandomAccessCode();
+            saveAccessCodeToDatabase(accessCode);
+        });
+
+        function generateRandomAccessCode() {
+            // Generate a random 6-character alphanumeric code
+            const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            let code = '';
+            for (let i = 0; i < 6; i++) {
+                code += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return code;
+        }
+
+        function saveAccessCodeToDatabase(accessCode) {
+            const accessCodeRef = ref(db, "access-codes");
+
+            // Push the access code to the database
+            push(accessCodeRef, accessCode)
+                .then(() => {
+                    console.log("Access code added to the database:", accessCode);
+                })
+                .catch((error) => {
+                    console.error("Error saving access code:", error);
+                });
+        }
+    </script>
+</body>
+</html>
