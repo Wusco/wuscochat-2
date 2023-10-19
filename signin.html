@@ -13,7 +13,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
 
     <script>
-        // Your web app's Firebase configuration
+        // Initialize Firebase
         const firebaseConfig = {
             apiKey: "AIzaSyADU9mE19sCAgybueA1CjB4pGMa7ALN0-M",
             authDomain: "wuscochat.firebaseapp.com",
@@ -23,27 +23,24 @@
             messagingSenderId: "1092324424182",
             appId: "1:1092324424182:web:6c7e02de473063660e2fd7"
         };
-
-        // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
 
-        // Get references to Firebase services
-        const auth = firebase.auth();
-        const googleProvider = new firebase.auth.GoogleAuthProvider();
+        // Function to handle Google Sign-In
+        function handleGoogleSignIn() {
+            const auth = firebase.auth();
+            const googleProvider = new firebase.auth.GoogleAuthProvider();
 
-        // Add an event listener to the "Sign In with Google" button
-        document.getElementById('google-sign-in').addEventListener('click', () => {
             auth.signInWithPopup(googleProvider)
                 .then((result) => {
                     const user = result.user;
                     const userEmail = user.email;
 
-                    const allowedEmails = ["dolangavin448@gmail.com", "user2@example.com"];
+                    const allowedEmails = ["dolangavin448@gmail.com","user2@example.com"];
                     if (allowedEmails.includes(userEmail)) {
                         // Set a cookie to indicate successful sign-in
                         document.cookie = "signed_in=true; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/";
                         // Redirect the user to another page, e.g., the chat page.
-                        window.location.href = "chat.html";
+                        window.location.href = "index.html";
                     } else {
                         // The user is not allowed. Redirect them to another page.
                         window.location.href = "https://www.example.com";
@@ -52,7 +49,10 @@
                 .catch((error) => {
                     console.error(error);
                 });
-        });
+        }
+
+        // Add an event listener to the "Sign In with Google" button
+        document.getElementById('google-sign-in').addEventListener('click', handleGoogleSignIn);
     </script>
 </body>
 </html>
