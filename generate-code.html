@@ -2,17 +2,19 @@
 <html>
 <head>
     <title>Generate Access Code</title>
-    <!-- Include Firebase and Firebase Database using CDN links -->
-    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js"></script>
 </head>
 <body>
     <h1>Generate Access Code</h1>
-    <button id="generate-code-button">Generate Code</button>
-    <div id="access-code-display"></div>
+    <p>Generate a one-time access code to share with others.</p>
+    
+    <form id="access-code-form">
+        <input type="text" id="access-code" placeholder="Access Code" required>
+        <button type="submit">Generate</button>
+    </form>
 
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js"></script>
     <script>
-        // Initialize Firebase with your project configuration
         const firebaseConfig = {
             apiKey: "AIzaSyADU9mE19sCAgybueA1CjB4pGMa7ALN0-M",
             authDomain: "wuscochat.firebaseapp.com",
@@ -23,34 +25,28 @@
             appId: "1:1092324424182:web:6c7e02de473063660e2fd7"
         };
 
-        firebase.initializeApp(firebaseConfig);
-
-        // Get a reference to the Firebase Realtime Database
+        const app = firebase.initializeApp(firebaseConfig);
         const database = firebase.database();
 
-        const generateCodeButton = document.getElementById('generate-code-button');
-        const accessCodeDisplay = document.getElementById('access-code-display');
+        const accessCodeForm = document.getElementById("access-code-form");
+        const accessCodeInput = document.getElementById("access-code");
 
-        generateCodeButton.addEventListener('click', function() {
-            // Generate a random access code (you can customize this)
-            const randomAccessCode = generateRandomCode();
-            accessCodeDisplay.textContent = "Access Code: " + randomAccessCode;
+        accessCodeForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const accessCode = accessCodeInput.value;
 
-            // Save the access code to the database under "access_codes" node
-            database.ref('access_codes').push(randomAccessCode);
+            // Upload the access code to Firebase.
+            const accessCodeRef = database.ref("access-codes").child(accessCode);
+            accessCodeRef.set({
+                status: "unused",
+            }, (error) => {
+                if (error) {
+                    console.error("Error uploading access code:", error);
+                } else {
+                    console.log("Access code uploaded successfully:", accessCode);
+                }
+            });
         });
-
-        // Function to generate a random access code
-        function generateRandomCode() {
-            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-            const codeLength = 8;
-            let code = '';
-            for (let i = 0; i < codeLength; i++) {
-                const randomIndex = Math.floor(Math.random() * characters.length);
-                code += characters.charAt(randomIndex);
-            }
-            return code;
-        }
     </script>
 </body>
 </html>
