@@ -104,10 +104,11 @@
                     document.cookie = "signed_in=true; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/";
 
                     // Redirect the user to another page, e.g., the chat page
-                    window.location.href = "index.html";
+                    window.location.href = "chat.html";
                 } else {
                     // The code does not exist, access denied
                     console.log("Access denied.");
+                    window.location.replace("./accessdenied.html");
                 }
             })
             .catch((error) => {
