@@ -55,11 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const hamburgerMenuIcon = document.querySelector('.hamburger-menu__icon');
       const hamburgerMenuLinks = document.querySelector('.hamburger-menu__links');
       const menuLinks = [
-        { title: 'Home', url: 'index.html' },
         { title: 'Settings', url: 'settings.html' },
-        { title: 'Music', url: 'music.html' },
-        { title: 'Notebook', url: 'notebook.html' },
-        { title: 'Live Chat', url: 'chat.html' },
+        { title: 'Live Chat', url: 'chat.html' }
       ];
 
       const generateMenuLinks = () => {
