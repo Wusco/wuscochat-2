@@ -44,10 +44,10 @@
             const accessCodeRef = ref(db, "access-codes/" + accessCode);
             set(accessCodeRef, { status: "available" })
                 .then(() => {
-                    alert("Access code saved: " + accessCode);
+                    alert("One time Use Access code saved: " + accessCode);
                 })
                 .catch((error) => {
-                    alert("Error saving access code: " + error);
+                    alert("Error saving One Time Use access code: " + error);
                 });
         });
     </script>
