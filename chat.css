@@ -289,11 +289,3 @@ body{
     background: #D64045;
     border-radius: 5px;
   }
-
-#emoji_button {
-  background-color: #f0f0f0;
-  border: none;
-  cursor: pointer;
-  font-size: 20px;
-  padding: 10px;
-}
