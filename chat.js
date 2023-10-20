@@ -144,7 +144,7 @@ const firebaseConfig = {
   
         var chat_input_container = document.createElement('div')
         chat_input_container.setAttribute('id', 'chat_input_container')
-  
+        
         var chat_input_send = document.createElement('button')
         chat_input_send.setAttribute('id', 'chat_input_send')
         chat_input_send.setAttribute('disabled', true)
@@ -156,6 +156,28 @@ const firebaseConfig = {
         chat_input.setAttribute('maxlength', 1000)
         // Get the name of the user
         chat_input.placeholder = `${parent.get_name()} Say something...`
+          
+        // Add the emoji button here
+        var emoji_button = document.createElement('button');
+        emoji_button.setAttribute('id', 'emoji_button');
+        emoji_button.innerHTML = '😀'; // You can use any emoji or icon here
+          
+         emoji_button.addEventListener('click', function() {
+    var event = new KeyboardEvent('keydown', {
+        bubbles: true,
+        cancelable: true,
+        shiftKey: true,
+        ctrlKey: true,
+        altKey: true,
+        code: 'Space',
+        key: ' ',
+        keyCode: 32,
+        which: 32
+    });
+
+    document.dispatchEvent(event);
+});
+          
         chat_input.onkeyup  = function(){
           if(chat_input.value.length > 0){
             chat_input_send.removeAttribute('disabled')
@@ -194,7 +216,7 @@ const firebaseConfig = {
         }
   
         chat_logout_container.append(chat_logout)
-        chat_input_container.append(chat_input, chat_input_send)
+        chat_input_container.append(chat_input, chat_input_send, emoji_button)
         chat_inner_container.append(chat_content_container, chat_input_container, chat_logout_container)
         chat_container.append(chat_inner_container)
         document.body.append(chat_container)
