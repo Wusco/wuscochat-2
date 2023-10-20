@@ -156,28 +156,6 @@ const firebaseConfig = {
         chat_input.setAttribute('maxlength', 1000)
         // Get the name of the user
         chat_input.placeholder = `${parent.get_name()} Say something...`
-          
-        // Add the emoji button here
-        var emoji_button = document.createElement('button');
-        emoji_button.setAttribute('id', 'emoji_button');
-        emoji_button.innerHTML = '😀'; // You can use any emoji or icon here
-          
-         emoji_button.addEventListener('click', function() {
-    var event = new KeyboardEvent('keydown', {
-        bubbles: true,
-        cancelable: true,
-        shiftKey: true,
-        ctrlKey: true,
-        altKey: true,
-        code: 'Space',
-        key: ' ',
-        keyCode: 32,
-        which: 32
-    });
-
-    document.dispatchEvent(event);
-});
-          
         chat_input.onkeyup  = function(){
           if(chat_input.value.length > 0){
             chat_input_send.removeAttribute('disabled')
