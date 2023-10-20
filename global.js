@@ -1,3 +1,51 @@
+// Check if first-party and third-party cookies are enabled
+if (navigator.cookieEnabled) {
+    // First-party cookies are enabled
+
+    // Check if third-party cookies are enabled
+    const testCookieName = 'testThirdPartyCookie';
+    const testCookieValue = 'test';
+    document.cookie = `${testCookieName}=${testCookieValue}; samesite=none; secure;`;
+    const thirdPartyCookiesEnabled = document.cookie.includes(testCookieValue);
+
+    if (!thirdPartyCookiesEnabled) {
+        // Third-party cookies are not enabled, display a popup
+        displayCookieEnablePopup();
+    }
+} else {
+    // First-party cookies are not enabled, display a popup
+    displayCookieEnablePopup();
+}
+
+function displayCookieEnablePopup() {
+    // Customize the popup to instruct the user to enable cookies
+    const popup = document.createElement('div');
+    popup.style.position = 'fixed';
+    popup.style.top = '0';
+    popup.style.left = '0';
+    popup.style.width = '100%';
+    popup.style.height = '100%';
+    popup.style.backgroundColor = 'rgba(0, 0, 0, 0.7)';
+    popup.style.color = '#fff';
+    popup.style.display = 'flex';
+    popup.style.justifyContent = 'center';
+    popup.style.alignItems = 'center';
+    popup.innerHTML = `
+        <p>Cookies are required to use this website. Please enable cookies in your browser settings.</p>
+    `;
+
+    // Append the popup to the body
+    document.body.appendChild(popup);
+
+    // Check if both first-party and third-party cookies are enabled
+    const testCookieName = 'testCookie';
+    const testCookieValue = 'test';
+    document.cookie = `${testCookieName}=${testCookieValue}`;
+    if (document.cookie.includes(testCookieValue)) {
+        // Both first-party and third-party cookies are enabled, remove the popup
+        document.body.removeChild(popup);
+    }
+}
 // Function to check authentication state and handle redirects
 function checkAuthState() {
     const signedInCookie = document.cookie.includes("signed_in=true");
