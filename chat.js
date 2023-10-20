@@ -194,7 +194,7 @@ const firebaseConfig = {
         }
   
         chat_logout_container.append(chat_logout)
-        chat_input_container.append(chat_input, chat_input_send, emoji_button)
+        chat_input_container.append(chat_input, chat_input_send)
         chat_inner_container.append(chat_content_container, chat_input_container, chat_logout_container)
         chat_container.append(chat_inner_container)
         document.body.append(chat_container)
