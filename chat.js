@@ -30,6 +30,7 @@ const firebaseConfig = {
       chat(){
         this.create_title()
         this.create_chat()
+        this.create_emoji_button();  
       }
       // create_title() is used to create the title
       create_title(){
@@ -95,7 +96,25 @@ const firebaseConfig = {
             join_button.classList.remove('enabled')
           }
         }
-  
+        create_emoji_button() {
+      // Create the emoji button and append it to the chat container
+      var chatContainer = document.getElementById('chat_container');
+
+      var emojiButtonContainer = document.createElement('div');
+      emojiButtonContainer.setAttribute('class', 'emoji-button-container');
+
+      var emojiButton = document.createElement('button');
+      emojiButton.setAttribute('id', 'emoji-button');
+      emojiButton.innerHTML = '<i class="fas fa-smile"></i>';
+
+      emojiButtonContainer.appendChild(emojiButton);
+      chatContainer.appendChild(emojiButtonContainer);
+
+      // Add a click event listener to open the emoji picker
+      emojiButton.addEventListener('click', function() {
+        emojiPicker.togglePicker(this); // Use the emoji picker library to open the picker
+      });
+    }
         // Append everything to the body
         join_button_container.append(join_button)
         join_input_container.append(join_input)
