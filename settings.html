@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>    
+<link rel="stylesheet" type="text/css" href="style.css" />      
+</head>
+<body style="margin:0;"> 
+<div id="loader"></div>      
+<div class="hamburger-menu">
+  <div class="hamburger-menu__icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="hamburger-menu__links"></div>
+</div>    
+<br>      
+      <button class="collapsible">Change Background</button>
+  <div class="content">
+    <div>
+      <label for="background-file">Upload an image:</label>
+      <input type="file" id="background-file">
+    </div>
+    <div>
+      <label for="background-url">Or enter a URL:</label>
+      <input type="text" id="background-url">
+    </div>
+     <a onclick="bi()"> PS if your image is pixalated you can go to this link and use one of these images </a>
+     <br>   
+    <button id="submit-button">Save Background</button>
+    <div id="my-preview"></div>
+  </div>
+    <input type="text" id="titleInput" placeholder="Enter title">
+<button onclick="setTitle()">Set Title</button>
+<br>      
+      <a href="https://favicon.io/favicon-converter/">jpeg to favicon</a>
+<br>      
+  <input type="file" id="faviconInput">
+  <br>
+  <button type="submit" id="saveFavicon">Save Favicon</button>
+  <br>    
+  <label for="passwordInput">Password:</label>
+  <input type="password" id="passwordInput">
+  <button type="submit" id="saveButton">Save Password</button>
+  <button type="submit" id="activateButton">Activate Password</button>
+  <button type="submit" id="deactivateButton">Deactivate Password</button>
+  <br>
+  <h1> Reload to see changes after applying. </h1>
+      
+    <script src="background.js"></script>
+    <script src="global.js"></script>  
+</body>
+</html>  
