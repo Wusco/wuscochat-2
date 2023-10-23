@@ -46,7 +46,7 @@ function displayCookieEnablePopup() {
         document.body.removeChild(popup);
     }
 }
-// Function to check authentication state and handle redirects
+// check if they have the signed in cookie and if they do then it will not do anything if they do not have it it will redirect them to the signin screen
 function checkAuthState() {
     const signedInCookie = document.cookie.includes("signed_in=true");
     if (!signedInCookie) {
