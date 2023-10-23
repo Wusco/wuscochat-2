@@ -56,7 +56,7 @@
         <button id="submit-access-code">Submit</button>
     </div>
     <script type="module">
-    // Firebase Realtime Database configuration
+    // Firebase Config
     const firebaseConfig = {
         apiKey: "AIzaSyADU9mE19sCAgybueA1CjB4pGMa7ALN0-M",
         authDomain: "wuscochat.firebaseapp.com",
@@ -90,23 +90,23 @@
         get(accessCodeRef)
             .then((snapshot) => {
                 if (snapshot.exists()) {
-                    // The code exists in the database, allowing access
+                    // if the access code exists it runs the script below if not it redirects to accessdenied
                     console.log("Access granted!");
 
-                    // Remove the code from the "access-codes" section
+                    // removes the code from the avalible codes and then below it saves the code to used codes
                     set(accessCodeRef, null);
 
-                    // Move it to a "used-codes" section (or any other structure you prefer)
+                    // move the avalible code to the used code part of the database 
                     const usedCodeRef = ref(db, "used-codes/" + accessCode);
                     set(usedCodeRef, true);
 
-                    // Set a cookie to indicate successful sign-in
+                    // sets cookie which allows them to access the site 
                     document.cookie = "signed_in=true; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/";
 
-                    // Redirect the user to another page, e.g., the chat page
+                    // after signing in it redirects to the chat
                     window.location.href = "chat.html";
                 } else {
-                    // The code does not exist, access denied
+                    // if the code doesn't exist sends them to accessdenied
                     console.log("Access denied.");
                     window.location.replace("./accessdenied.html");
                 }
