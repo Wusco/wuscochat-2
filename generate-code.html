@@ -40,7 +40,7 @@
             e.preventDefault();
             const accessCode = accessCodeInput.value;
 
-            // Check if the access code already exists
+            // check for access code and if it exists
             const accessCodeRef = ref(db, "access-codes/" + accessCode);
             set(accessCodeRef, { status: "available" })
                 .then(() => {
