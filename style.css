@@ -3,6 +3,7 @@
 .containerdiv{
   background-color: #f5f5f5;
   border-radius: 10px;
+  text-align: center;
 }
 
 #sort-select {
