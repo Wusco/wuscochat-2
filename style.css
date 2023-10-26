@@ -306,7 +306,7 @@ textarea {
 .hamburger-menu__icon span:nth-child(3) {
   bottom: 0;	
 }
-.hamburger-menu__icon span:nth-child(4):hover {
+.hamburger-menu__icon span:nth-child(3):hover {
   transform: translateY(-25%);
 }
 
