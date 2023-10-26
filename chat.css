@@ -120,6 +120,7 @@ body{
     margin-top: 40px;
     /* Fade in container */
     animation: fadeIn 1s linear;
+      border-radius: 10px;
   
   }
   #chat_inner_container{
