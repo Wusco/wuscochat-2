@@ -273,6 +273,7 @@ textarea {
   z-index: 1000;
   cursor: pointer;
   background-color: black;	
+  transition: 1s;
 }
 
 .hamburger-menu__icon {
