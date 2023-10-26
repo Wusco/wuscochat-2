@@ -319,6 +319,7 @@ button.remove-button:hover {
       text-align: center;
       outline: none;
       font-size: 20px;
+	border-radius: 10px;
     }
 
     .active, .collapsible:hover {
