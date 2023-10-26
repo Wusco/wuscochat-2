@@ -171,10 +171,13 @@ button.remove-button:hover {
       text-align: left;
       outline: none;
       font-size: 20px;
+    border-radius: 10px;
+  transition: 1s;
     }
 
     .active, .collapsible:hover {
       background-color: #0062cc;
+      border-radius: 20px;
     }
 
     .content {
