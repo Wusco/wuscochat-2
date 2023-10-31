@@ -156,8 +156,30 @@ const firebaseConfig = {
         chat_input.setAttribute('maxlength', 1000)
         // Get the name of the user
         chat_input.placeholder = `${parent.get_name()} - Say something...`
-
-        create_left_sidebar() {
+        chat_input.onkeyup  = function(){
+          if(chat_input.value.length > 0){
+            chat_input_send.removeAttribute('disabled')
+            chat_input_send.classList.add('enabled')
+            chat_input_send.onclick = function(){
+              chat_input_send.setAttribute('disabled', true)
+              chat_input_send.classList.remove('enabled')
+              if(chat_input.value.length <= 0){
+                return
+              }
+              // Enable the loading circle in the 'chat_content_container'
+              parent.create_load('chat_content_container')
+              // Send the message. Pass in the chat_input.value
+              parent.send_message(chat_input.value)
+              // Clear the chat input box
+              chat_input.value = ''
+              // Focus on the input just after
+              chat_input.focus()
+            }
+          }else{
+            chat_input_send.classList.remove('enabled')
+          }
+        }
+         create_left_sidebar() {
         var leftSidebar = document.createElement('div');
         leftSidebar.setAttribute('class', 'sidebar left-sidebar');
 
@@ -188,31 +210,6 @@ const firebaseConfig = {
 
         document.body.appendChild(rightSidebar);
         }
-
-        chat_input.onkeyup  = function(){
-          if(chat_input.value.length > 0){
-            chat_input_send.removeAttribute('disabled')
-            chat_input_send.classList.add('enabled')
-            chat_input_send.onclick = function(){
-              chat_input_send.setAttribute('disabled', true)
-              chat_input_send.classList.remove('enabled')
-              if(chat_input.value.length <= 0){
-                return
-              }
-              // Enable the loading circle in the 'chat_content_container'
-              parent.create_load('chat_content_container')
-              // Send the message. Pass in the chat_input.value
-              parent.send_message(chat_input.value)
-              // Clear the chat input box
-              chat_input.value = ''
-              // Focus on the input just after
-              chat_input.focus()
-            }
-          }else{
-            chat_input_send.classList.remove('enabled')
-          }
-        }
-  
         var chat_logout_container = document.createElement('div')
         chat_logout_container.setAttribute('id', 'chat_logout_container')
   
