@@ -1,6 +1,6 @@
 // Check if first-party and third-party cookies are enabled
 if (navigator.cookieEnabled) {
-    // First-party cookies are enabled
+    console.log('First-party cookies are enabled');
 
     // Check if third-party cookies are enabled
     const testCookieName = 'testThirdPartyCookie';
@@ -8,12 +8,14 @@ if (navigator.cookieEnabled) {
     document.cookie = `${testCookieName}=${testCookieValue}; samesite=none; secure;`;
     const thirdPartyCookiesEnabled = document.cookie.includes(testCookieValue);
 
-    if (!thirdPartyCookiesEnabled) {
-        // Third-party cookies are not enabled, display a popup
+    if (thirdPartyCookiesEnabled) {
+        console.log('Third-party cookies are enabled');
+    } else {
+        console.log('Third-party cookies are not enabled');
         displayCookieEnablePopup();
     }
 } else {
-    // First-party cookies are not enabled, display a popup
+    console.log('First-party cookies are not enabled');
     displayCookieEnablePopup();
 }
 
@@ -42,8 +44,11 @@ function displayCookieEnablePopup() {
     const testCookieValue = 'test';
     document.cookie = `${testCookieName}=${testCookieValue}`;
     if (document.cookie.includes(testCookieValue)) {
+        console.log('Both first-party and third-party cookies are enabled');
         // Both first-party and third-party cookies are enabled, remove the popup
         document.body.removeChild(popup);
+    } else {
+        console.log('First-party or third-party cookies are still not enabled');
     }
 }
 
@@ -52,6 +57,7 @@ function displayCookieEnablePopup() {
 function checkAuthState() {
     const signedInCookie = document.cookie.includes("signed_in=true");
     if (!signedInCookie) {
+        console.log('User is not signed in. Redirecting to sign-in page.');
         // User is not signed in, redirect to the sign-in page.
         window.location.href = "signin.html";
     }
@@ -86,15 +92,24 @@ document.addEventListener('DOMContentLoaded', () => {
             // Retrieve and apply the saved page title and background image
             const savedTitle = localStorage.getItem("pageTitle");
             if (savedTitle) {
+                console.log('Retrieved saved title:', savedTitle);
                 document.title = savedTitle;
             } else {
                 // If no saved title is found, set a preset title
-                document.title = "WuscoChat";
+                const presetTitle = "WuscoChat"; // Replace with your preset title
+                console.log('Using preset title:', presetTitle);
+                document.title = presetTitle;
             }
 
             const background = localStorage.getItem('background');
             if (background) {
+                console.log('Retrieved saved background:', background);
                 document.body.style.backgroundImage = background;
+            } else {
+                // If no saved background is found, set a preset background
+                const presetBackground = 'url("preset-background.jpg")'; // Replace with your preset background
+                console.log('Using preset background:', presetBackground);
+                document.body.style.backgroundImage = presetBackground;
             }
 
             // Retrieve the preset favicon and apply it
@@ -102,17 +117,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentFavicon = document.querySelector('link[rel="shortcut icon"]');
 
             if (!currentFavicon || currentFavicon.getAttribute('href') !== presetFavicon) {
-                const favicon = document.createElement('link');
-                favicon.type = 'image/x-icon';
-                favicon.rel = 'shortcut icon';
-                favicon.href = presetFavicon;
+                const newFavicon = document.createElement('link');
+                newFavicon.rel = 'shortcut icon';
+                newFavicon.href = presetFavicon;
+                newFavicon.type = 'image/x-icon';
 
                 if (currentFavicon) {
                     // Replace the existing favicon with the preset one
                     document.head.removeChild(currentFavicon);
                 }
 
-                document.head.appendChild(favicon);
+                document.head.appendChild(newFavicon);
+
+                console.log('Set favicon to:', presetFavicon);
+            } else {
+                console.log('Favicon is already set to:', presetFavicon);
             }
 
             // Load hamburger menu
