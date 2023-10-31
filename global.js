@@ -46,9 +46,7 @@ function displayCookieEnablePopup() {
         document.body.removeChild(popup);
     }
 }
-
-// Check if they have the signed-in cookie, and if they do, it will not do anything.
-// If they do not have it, it will redirect them to the sign-in page.
+// check if they have the signed in cookie and if they do then it will not do anything if they do not have it it will redirect them to the signin screen
 function checkAuthState() {
     const signedInCookie = document.cookie.includes("signed_in=true");
     if (!signedInCookie) {
@@ -61,7 +59,6 @@ function checkAuthState() {
 document.addEventListener("DOMContentLoaded", function() {
     checkAuthState();
 });
-
 // Create the loading logo image
 const img = document.createElement("img");
 img.src = "watermark.png";
@@ -75,95 +72,72 @@ img.style.borderRadius = "50%";
 img.classList.add("rotate"); // Add the rotate class
 
 document.addEventListener('DOMContentLoaded', () => {
-    document.body.appendChild(img);
+  document.body.appendChild(img);
 
-    // Wait for the page to fully load
-    window.addEventListener('load', () => {
-        // Add an artificial delay of .4 seconds to run this code below
-        setTimeout(() => {
-            document.body.removeChild(img);
+  // Wait for the page to fully load
+  window.addEventListener('load', () => {
+    // Add an artificial delay of .4 seconds to run this code below
+    setTimeout(() => {
+      document.body.removeChild(img);
 
-            // Retrieve and apply the saved page title and background image
-            const savedTitle = localStorage.getItem("pageTitle");
-            if (savedTitle) {
-                console.log("Retrieved saved title:", savedTitle);
-                document.title = savedTitle;
-            } else {
-                // If no saved title is found, set a preset title
-                document.title = "WuscoChat";
-            }
+      // Retrieve and apply the saved page title, background image, and favicon
+      const savedTitle = localStorage.getItem("pageTitle");
+      if (savedTitle) {
+        document.title = savedTitle;
+      }
 
-            // Check for a saved favicon in localStorage
-            const savedFavicon = localStorage.getItem('favicon');
-            console.log("Retrieved saved favicon:", savedFavicon);
+      const background = localStorage.getItem('background');
+      if (background) {
+        document.body.style.backgroundImage = background;
+      }
 
-            const currentFavicon = document.querySelector('link[rel="shortcut icon"]');
-            if (savedFavicon) {
-                console.log("Setting favicon to saved favicon:", savedFavicon);
-                if (currentFavicon) {
-                    currentFavicon.href = savedFavicon; // Set the saved favicon if it exists
-                } else {
-                    const favicon = document.createElement('link');
-                    favicon.type = 'image/x-icon';
-                    favicon.rel = 'shortcut icon';
-                    favicon.href = savedFavicon;
-                    document.head.appendChild(favicon); // Create and set the saved favicon if it doesn't exist
-                }
-            } else {
-                // If no saved favicon is found, set the preset favicon
-                const presetFavicon = 'favicon.ico'; // Replace with your actual preset favicon path
-                console.log("Setting favicon to preset favicon:", presetFavicon);
-                if (currentFavicon) {
-                    currentFavicon.href = presetFavicon;
-                } else {
-                    const favicon = document.createElement('link');
-                    favicon.type = 'image/x-icon';
-                    favicon.rel = 'shortcut icon';
-                    favicon.href = presetFavicon;
-                    document.head.appendChild(favicon);
-                }
+      const urlf = localStorage.getItem("favicon");
+      const favicon = document.querySelector('link[rel="shortcut icon"]') || document.createElement('link');
+      favicon.type = 'image/x-icon';
+      favicon.rel = 'shortcut icon';
+      favicon.href = urlf;
+      document.head.appendChild(favicon);
 
-                // Load hamburger menu
-                const hamburgerMenu = document.querySelector('.hamburger-menu');
-                const hamburgerMenuIcon = document.querySelector('.hamburger-menu__icon');
-                const hamburgerMenuLinks = document.querySelector('.hamburger-menu__links');
-                const menuLinks = [
-                    { title: 'Settings', url: 'settings.html' },
-                    { title: 'Live Chat', url: 'chat.html' }
-                ];
+      // Load hamburger menu
+      const hamburgerMenu = document.querySelector('.hamburger-menu');
+      const hamburgerMenuIcon = document.querySelector('.hamburger-menu__icon');
+      const hamburgerMenuLinks = document.querySelector('.hamburger-menu__links');
+      const menuLinks = [
+        { title: 'Settings', url: 'settings.html' },
+        { title: 'Live Chat', url: 'chat.html' }
+      ];
 
-                const generateMenuLinks = () => {
-                    const menuLinksHTML = menuLinks.map(link => `<a href="${link.url}" class="menu-link">${link.title}</a>`).join('');
-                    hamburgerMenuLinks.innerHTML = menuLinksHTML;
-                };
+      const generateMenuLinks = () => {
+        const menuLinksHTML = menuLinks.map(link => `<a href="${link.url}" class="menu-link">${link.title}</a>`).join('');
+        hamburgerMenuLinks.innerHTML = menuLinksHTML;
+      };
 
-                hamburgerMenuIcon.addEventListener('click', () => {
-                    hamburgerMenu.classList.toggle('active');
-                    hamburgerMenuLinks.style.height = hamburgerMenu.classList.contains('active') ? 'auto' : '0';
-                });
+      hamburgerMenuIcon.addEventListener('click', () => {
+        hamburgerMenu.classList.toggle('active');
+        hamburgerMenuLinks.style.height = hamburgerMenu.classList.contains('active') ? 'auto' : '0';
+      });
 
-                generateMenuLinks();
+      generateMenuLinks();
 
-                menuLinks.forEach(link => {
-                    const anchor = hamburgerMenuLinks.querySelector(`[href="${link.url}"]`);
-                    anchor.addEventListener('click', () => {
-                        const href = anchor.getAttribute('href');
-                        window.location.href = href;
-                    });
-                });
+      menuLinks.forEach(link => {
+        const anchor = hamburgerMenuLinks.querySelector(`[href="${link.url}"]`);
+        anchor.addEventListener('click', () => {
+          const href = anchor.getAttribute('href');
+          window.location.href = href;
+        });
+      });
 
-                // Check for password protection and prompt the user if necessary
-                const password = localStorage.getItem('password') || '';
-                const passwordActive = localStorage.getItem('passwordActive') === 'true';
+      // Check for password protection and prompt the user if necessary
+      const password = localStorage.getItem('password') || '';
+      const passwordActive = localStorage.getItem('passwordActive') === 'true';
 
-                if (password && passwordActive) {
-                    const input = prompt('Enter password:');
-                    if (input !== password) {
-                        alert('Incorrect password!');
-                        window.location.href = 'https://www.youtube.com/watch?v=o-YBDTqX_ZU';
-                    }
-                }
-            }
-        }, 400); // Wait for .4 seconds (400 milliseconds) before executing this code above
-    });
+      if (password && passwordActive) {
+        const input = prompt('Enter password:');
+        if (input !== password) {
+          alert('Incorrect password!');
+          window.location.href = 'https://www.youtube.com/watch?v=o-YBDTqX_ZU';
+        }
+      }
+    }, 400); // Wait for .4 seconds (400 milliseconds) before executing this code above
+  });
 });
