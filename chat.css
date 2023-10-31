@@ -307,28 +307,26 @@ body{
 /* Left Sidebar */
 .left-sidebar {
   position: fixed;
-  top: 0;
+  top: 100px; /* Adjust this value based on the height of the title container */
   left: 0;
   width: 200px;
   background-color: #fff;
   color: #333;
   padding: 20px;
-  bottom: 0;
-  height: 100%;
+  height: calc(100% - 100px); /* 100px is the height of the title container */
   overflow: auto; /* This allows scrolling if content exceeds the height */
 }
 
 /* Right Sidebar */
 .right-sidebar {
   position: fixed;
-  top: 0;
+  top: 100px; /* Adjust this value based on the height of the title container */
   right: 0;
   width: 200px;
   background-color: #fff;
   color: #333;
   padding: 20px;
-  bottom: 0;
-  height: 100%;
+  height: calc(100% - 100px); /* 100px is the height of the title container */
   overflow: auto; /* This allows scrolling if content exceeds the height */
 }
 
