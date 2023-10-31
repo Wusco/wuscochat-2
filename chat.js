@@ -30,6 +30,8 @@ const firebaseConfig = {
       chat(){
         this.create_title()
         this.create_chat()
+        this.create_left_sidebar();
+        this.create_right_sidebar();
       }
       // create_title() is used to create the title
       create_title(){
@@ -122,6 +124,34 @@ const firebaseConfig = {
         container.append(loader_container)
   
       }
+
+         create_left_sidebar() {
+    var leftSidebar = document.createElement('div');
+    leftSidebar.setAttribute('id', 'left-sidebar');
+    leftSidebar.innerHTML = 'This is the left sidebar (Example)'; // You can customize its content
+    leftSidebar.classList.add('left-sidebar'); // Add CSS class for styling
+    document.body.append(leftSidebar);
+  }
+
+  create_right_sidebar() {
+    var rightSidebar = document.createElement('div');
+    rightSidebar.setAttribute('id', 'right-sidebar');
+    rightSidebar.innerHTML = 'Chat Rules:'; // You can customize its content
+    rightSidebar.classList.add('right-sidebar'); // Add CSS class for styling
+
+    var rules = document.createElement('ul');
+    rules.innerHTML = `
+      <li>Rule 1: Be respectful to others.</li>
+      <li>Rule 2: No spamming or flooding the chat.</li>
+      <li>Rule 3: Keep the discussion on-topic.</li>
+      <li>Rule 4: No hate speech or offensive content.</li>
+    `;
+
+    rightSidebar.append(rules);
+
+    document.body.append(rightSidebar);
+  }
+     
       // create_chat() creates the chat container and stuff
       create_chat(){
         // Again! You need to have (parent = this)
