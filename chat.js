@@ -156,6 +156,39 @@ const firebaseConfig = {
         chat_input.setAttribute('maxlength', 1000)
         // Get the name of the user
         chat_input.placeholder = `${parent.get_name()} - Say something...`
+
+        create_left_sidebar() {
+        var leftSidebar = document.createElement('div');
+        leftSidebar.setAttribute('class', 'sidebar left-sidebar');
+
+        var leftSidebarContent = document.createElement('div');
+        leftSidebarContent.setAttribute('class', 'sidebar-content');
+
+        var exampleContent = document.createElement('div');
+        exampleContent.innerHTML = '<h2>Example</h2><p>This is an example of content for the left sidebar.</p>';
+
+        leftSidebarContent.appendChild(exampleContent);
+        leftSidebar.appendChild(leftSidebarContent);
+
+        document.body.appendChild(leftSidebar);
+        }
+
+        create_right_sidebar() {
+        var rightSidebar = document.createElement('div');
+        rightSidebar.setAttribute('class', 'sidebar right-sidebar');
+
+        var rightSidebarContent = document.createElement('div');
+        rightSidebarContent.setAttribute('class', 'sidebar-content');
+
+        var chatRulesContent = document.createElement('div');
+        chatRulesContent.innerHTML = '<h2>Chat Rules</h2><p>These are the rules for the chat:</p><ul><li>Rule 1: Be respectful to others.</li><li>Rule 2: No spamming or advertising.</li><li>Rule 3: Keep the chat family-friendly.</li></ul>';
+
+        rightSidebarContent.appendChild(chatRulesContent);
+        rightSidebar.appendChild(rightSidebarContent);
+
+        document.body.appendChild(rightSidebar);
+        }
+
         chat_input.onkeyup  = function(){
           if(chat_input.value.length > 0){
             chat_input_send.removeAttribute('disabled')
