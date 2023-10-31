@@ -85,7 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (savedTitle) {
         document.title = savedTitle;
       }
-
+     if (!savedTitle) {
+        document.title = "WuscoChat";
+      }
       const background = localStorage.getItem('background');
       if (background) {
         document.body.style.backgroundImage = background;
