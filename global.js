@@ -86,6 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Retrieve and apply the saved page title and background image
             const savedTitle = localStorage.getItem("pageTitle");
             if (savedTitle) {
+                console.log("Retrieved saved title:", savedTitle);
                 document.title = savedTitle;
             } else {
                 // If no saved title is found, set a preset title
@@ -94,14 +95,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const background = localStorage.getItem('background');
             if (background) {
+                console.log("Retrieved saved background:", background);
                 document.body.style.backgroundImage = background;
             }
 
             // Check for a saved favicon in localStorage
             const savedFavicon = localStorage.getItem('favicon');
+            console.log("Retrieved saved favicon:", savedFavicon);
+
             const currentFavicon = document.querySelector('link[rel="shortcut icon"]');
 
             if (savedFavicon) {
+                console.log("Setting favicon to saved favicon:", savedFavicon);
                 if (currentFavicon) {
                     currentFavicon.href = savedFavicon; // Set the saved favicon if it exists
                 } else {
@@ -114,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 // If no saved favicon is found, set the preset favicon
                 const presetFavicon = 'favicon.ico'; // Replace with your actual preset favicon path
+                console.log("Setting favicon to preset favicon:", presetFavicon);
                 if (currentFavicon) {
                     currentFavicon.href = presetFavicon;
                 } else {
