@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Check for a saved favicon in localStorage
             const savedFavicon = localStorage.getItem('favicon');
-            const currentFavicon = document.querySelector('link[rel="shortcut icon']');
+            const currentFavicon = document.querySelector('link[rel="shortcut icon"]');
 
             if (savedFavicon) {
                 if (currentFavicon) {
