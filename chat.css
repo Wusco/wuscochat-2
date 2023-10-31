@@ -339,3 +339,11 @@ body{
 .right-sidebar ul li {
   margin-bottom: 10px;
 }
+
+/* Logo Image */
+.logo {
+  vertical-align: middle; /* Align the image vertically with text */
+  margin-left: 5px; /* Adjust margin as needed */
+  height: 1em; /* Set the height relative to the font size */
+  border-radius: 50%; /* Make the image circular */
+}
