@@ -129,7 +129,7 @@ const firebaseConfig = {
     var leftSidebar = document.createElement('div');
     leftSidebar.setAttribute('id', 'left-sidebar');
     // add what you want here enzo
-    leftSidebar.innerHTML = 'Example enzo add what you want here'; 
+    leftSidebar.innerHTML = 'enzo add what you want here'; 
     leftSidebar.classList.add('left-sidebar'); 
     document.body.append(leftSidebar);
   }
