@@ -145,11 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
 
                 hamburgerMenuIcon.addEventListener('click', () => {
-                    console.log('Hamburger menu icon clicked.'); // Debugging log
                     hamburgerMenu.classList.toggle('active');
-                    const height = hamburgerMenu.classList.contains('active') ? `${menuLinks.length * 30}px` : '0';
-                    hamburgerMenuLinks.style.height = height;
-                    console.log('Hamburger menu active:', hamburgerMenu.classList.contains('active')); // Debugging log
+                    hamburgerMenuLinks.style.height = hamburgerMenu.classList.contains('active') ? 'auto' : '0';
                 });
 
                 generateMenuLinks();
