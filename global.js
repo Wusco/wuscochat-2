@@ -1,6 +1,6 @@
 // Check if first-party and third-party cookies are enabled
 if (navigator.cookieEnabled) {
-    console.log('First-party cookies are enabled');
+    // First-party cookies are enabled
 
     // Check if third-party cookies are enabled
     const testCookieName = 'testThirdPartyCookie';
@@ -9,11 +9,11 @@ if (navigator.cookieEnabled) {
     const thirdPartyCookiesEnabled = document.cookie.includes(testCookieValue);
 
     if (!thirdPartyCookiesEnabled) {
-        console.log('Third-party cookies are not enabled, displaying popup');
+        // Third-party cookies are not enabled, display a popup
         displayCookieEnablePopup();
     }
 } else {
-    console.log('First-party cookies are not enabled, displaying popup');
+    // First-party cookies are not enabled, display a popup
     displayCookieEnablePopup();
 }
 
@@ -42,7 +42,7 @@ function displayCookieEnablePopup() {
     const testCookieValue = 'test';
     document.cookie = `${testCookieName}=${testCookieValue}`;
     if (document.cookie.includes(testCookieValue)) {
-        console.log('Both first-party and third-party cookies are enabled, removing popup');
+        // Both first-party and third-party cookies are enabled, remove the popup
         document.body.removeChild(popup);
     }
 }
@@ -52,7 +52,7 @@ function displayCookieEnablePopup() {
 function checkAuthState() {
     const signedInCookie = document.cookie.includes("signed_in=true");
     if (!signedInCookie) {
-        console.log('User is not signed in, redirecting to the sign-in page');
+        // User is not signed in, redirect to the sign-in page.
         window.location.href = "signin.html";
     }
 }
@@ -81,14 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('load', () => {
         // Add an artificial delay of .4 seconds to run this code below
         setTimeout(() => {
-            console.log('Page fully loaded');
-
             document.body.removeChild(img);
 
             // Retrieve and apply the saved page title and background image
             const savedTitle = localStorage.getItem("pageTitle");
-            console.log('Retrieved saved title:', savedTitle);
             if (savedTitle) {
+                console.log("Retrieved saved title:", savedTitle);
                 document.title = savedTitle;
             } else {
                 // If no saved title is found, set a preset title
@@ -96,18 +94,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const background = localStorage.getItem('background');
-            console.log('Retrieved saved background:', background);
             if (background) {
+                console.log("Retrieved saved background:", background);
                 document.body.style.backgroundImage = background;
             }
 
             // Check for a saved favicon in localStorage
             const savedFavicon = localStorage.getItem('favicon');
-            console.log('Retrieved saved favicon:', savedFavicon);
-            const currentFavicon = document.querySelector('link[rel="shortcut icon']');
+            console.log("Retrieved saved favicon:", savedFavicon);
+
+            const currentFavicon = document.querySelector('link[rel="shortcut icon"]');
 
             if (savedFavicon) {
-                console.log('Setting favicon to saved favicon:', savedFavicon);
+                console.log("Setting favicon to saved favicon:", savedFavicon);
                 if (currentFavicon) {
                     currentFavicon.href = savedFavicon; // Set the saved favicon if it exists
                 } else {
@@ -120,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 // If no saved favicon is found, set the preset favicon
                 const presetFavicon = 'favicon.ico'; // Replace with your actual preset favicon path
-                console.log('Setting favicon to preset favicon:', presetFavicon);
+                console.log("Setting favicon to preset favicon:", presetFavicon);
                 if (currentFavicon) {
                     currentFavicon.href = presetFavicon;
                 } else {
@@ -146,7 +145,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
 
                 hamburgerMenuIcon.addEventListener('click', () => {
-                    console.log('Hamburger menu icon clicked');
                     hamburgerMenu.classList.toggle('active');
                     hamburgerMenuLinks.style.height = hamburgerMenu.classList.contains('active') ? 'auto' : '0';
                 });
