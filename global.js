@@ -91,7 +91,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const background = localStorage.getItem('background');
       if (background) {
         document.body.style.backgroundImage = background;
-      }
+      } else {
+      // If no background is detected in localStorage, set a preset background
+       const presetBackground = 'url("your-background-image.jpg")';
+       document.body.style.backgroundImage = presetBackground;
+       }
 
       const urlf = localStorage.getItem("favicon");
       const favicon = document.querySelector('link[rel="shortcut icon"]') || document.createElement('link');
