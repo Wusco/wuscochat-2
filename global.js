@@ -80,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {
       document.body.removeChild(img);
 
-      // Retrieve and apply the saved page title, background image, and favicon
       const savedTitle = localStorage.getItem("pageTitle");
       if (savedTitle) {
         document.title = savedTitle;
@@ -92,7 +91,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (background) {
         document.body.style.backgroundImage = background;
       } else {
-      // If no background is detected in localStorage, set a preset background
        const presetBackground = 'url("your-background-image.jpg")';
        document.body.style.backgroundImage = presetBackground;
        }
