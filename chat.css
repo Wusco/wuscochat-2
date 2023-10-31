@@ -307,27 +307,29 @@ body{
 /* Left Sidebar */
 .left-sidebar {
   position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
   left: 0;
   width: 200px;
   background-color: #fff;
   color: #333;
   padding: 20px;
-  height: 30%; /* Adjust the height as needed */
+  bottom: 0;
+  height: 100%;
+  overflow: auto; /* This allows scrolling if content exceeds the height */
 }
 
 /* Right Sidebar */
 .right-sidebar {
   position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
   right: 0;
   width: 200px;
   background-color: #fff;
   color: #333;
   padding: 20px;
-  height: 30%; /* Adjust the height as needed */
+  bottom: 0;
+  height: 100%;
+  overflow: auto; /* This allows scrolling if content exceeds the height */
 }
 
 .right-sidebar ul {
