@@ -48,7 +48,7 @@ function displayCookieEnablePopup() {
 }
 
 // Check if they have the signed-in cookie, and if they do, it will not do anything.
-// If they do not have it, it will redirect them to the sign-in screen.
+// If they do not have it, it will redirect them to the sign-in page.
 function checkAuthState() {
     const signedInCookie = document.cookie.includes("signed_in=true");
     if (!signedInCookie) {
@@ -100,13 +100,18 @@ document.addEventListener('DOMContentLoaded', () => {
             // Retrieve the preset favicon and apply it
             const presetFavicon = 'favicon.ico'; // Replace with your actual preset favicon path
             const currentFavicon = document.querySelector('link[rel="shortcut icon"]');
-            if (currentFavicon && currentFavicon.getAttribute('href') !== presetFavicon) {
-                currentFavicon.setAttribute('href', presetFavicon);
-            } else if (!currentFavicon) {
+
+            if (!currentFavicon || currentFavicon.getAttribute('href') !== presetFavicon) {
                 const favicon = document.createElement('link');
                 favicon.type = 'image/x-icon';
                 favicon.rel = 'shortcut icon';
                 favicon.href = presetFavicon;
+
+                if (currentFavicon) {
+                    // Replace the existing favicon with the preset one
+                    document.head.removeChild(currentFavicon);
+                }
+
                 document.head.appendChild(favicon);
             }
 
