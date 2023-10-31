@@ -145,8 +145,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
 
                 hamburgerMenuIcon.addEventListener('click', () => {
+                    console.log('Hamburger menu icon clicked.'); // Debugging log
                     hamburgerMenu.classList.toggle('active');
                     hamburgerMenuLinks.style.height = hamburgerMenu.classList.contains('active') ? 'auto' : '0';
+                    console.log('Hamburger menu active:', hamburgerMenu.classList.contains('active')); // Debugging log
                 });
 
                 generateMenuLinks();
@@ -154,6 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 menuLinks.forEach(link => {
                     const anchor = hamburgerMenuLinks.querySelector(`[href="${link.url}"]`);
                     anchor.addEventListener('click', () => {
+                        console.log('Menu link clicked:', link.title); // Debugging log
                         const href = anchor.getAttribute('href');
                         window.location.href = href;
                     });
