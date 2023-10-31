@@ -310,14 +310,11 @@ body{
   top: 50%;
   transform: translateY(-50%);
   left: 0;
-  width: 200px; /* Adjust the width as needed */
-  background-color: #fff; /* Set to white */
-  color: #333; /* Text color */
+  width: 200px;
+  background-color: #fff;
+  color: #333;
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: calc(100% - 100px); /* Subtract chat title height */
+  height: 30%; /* Adjust the height as needed */
 }
 
 /* Right Sidebar */
@@ -326,14 +323,11 @@ body{
   top: 50%;
   transform: translateY(-50%);
   right: 0;
-  width: 200px; /* Adjust the width as needed */
-  background-color: #fff; /* Set to white */
-  color: #333; /* Text color */
+  width: 200px;
+  background-color: #fff;
+  color: #333;
   padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  height: calc(100% - 100px); /* Subtract chat title height */
+  height: 30%; /* Adjust the height as needed */
 }
 
 .right-sidebar ul {
@@ -345,5 +339,3 @@ body{
 .right-sidebar ul li {
   margin-bottom: 10px;
 }
-
-/* Add any other styles you want for the sidebars here */
