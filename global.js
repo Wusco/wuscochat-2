@@ -93,18 +93,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.title = "WuscoChat";
             }
 
-            const background = localStorage.getItem('background');
-            if (background) {
-                console.log("Retrieved saved background:", background);
-                document.body.style.backgroundImage = background;
-            }
-
             // Check for a saved favicon in localStorage
             const savedFavicon = localStorage.getItem('favicon');
             console.log("Retrieved saved favicon:", savedFavicon);
 
             const currentFavicon = document.querySelector('link[rel="shortcut icon"]');
-
             if (savedFavicon) {
                 console.log("Setting favicon to saved favicon:", savedFavicon);
                 if (currentFavicon) {
