@@ -128,24 +128,24 @@ const firebaseConfig = {
          create_left_sidebar() {
     var leftSidebar = document.createElement('div');
     leftSidebar.setAttribute('id', 'left-sidebar');
-    leftSidebar.innerHTML = 'This is the left sidebar (Example)'; // You can customize its content
-    leftSidebar.classList.add('left-sidebar'); // Add CSS class for styling
+    // add what you want here enzo
+    leftSidebar.innerHTML = 'Example enzo add what you want here'; 
+    leftSidebar.classList.add('left-sidebar'); 
     document.body.append(leftSidebar);
   }
 
   create_right_sidebar() {
     var rightSidebar = document.createElement('div');
     rightSidebar.setAttribute('id', 'right-sidebar');
-    rightSidebar.innerHTML = 'Chat Rules:'; // You can customize its content
-    rightSidebar.classList.add('right-sidebar'); // Add CSS class for styling
+    rightSidebar.innerHTML = 'WuscoChat Rules:'; 
+    rightSidebar.classList.add('right-sidebar'); 
 
     var rules = document.createElement('ul');
+   // add your rules here enzo
     rules.innerHTML = `
-      <li>Rule 1: Be respectful to others.</li>
-      <li>Rule 2: No spamming or flooding the chat.</li>
-      <li>Rule 3: Keep the discussion on-topic.</li>
-      <li>Rule 4: No hate speech or offensive content.</li>
-    `;
+      <li>Rule 1: No spamming or flooding the chat.</li>
+          
+          `;
 
     rightSidebar.append(rules);
 
