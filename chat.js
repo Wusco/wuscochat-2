@@ -145,7 +145,7 @@ const firebaseConfig = {
     rules.innerHTML = `
       <br>
       <li>Rule 1: No spamming or flooding the chat.</li>
-      <li>Rule 2: No text art and no nsfw.</li>
+      <li>Rule 2: No text art or nsfw.</li>
           `;
 
     rightSidebar.append(rules);
