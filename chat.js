@@ -137,7 +137,7 @@ const firebaseConfig = {
   create_right_sidebar() {
     var rightSidebar = document.createElement('div');
     rightSidebar.setAttribute('id', 'right-sidebar');
-    rightSidebar.innerHTML = 'WuscoChat Rules:'; 
+    rightSidebar.innerHTML = 'WuscoChat Rules: <br>'; 
     rightSidebar.classList.add('right-sidebar'); 
 
     var rules = document.createElement('ul');
