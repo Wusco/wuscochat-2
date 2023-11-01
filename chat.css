@@ -312,7 +312,6 @@ body{
   width: 200px;
   background-color: #fff;
   color: #333;
-  padding: 0px;
   height: calc(100% - 10px);
   overflow: auto;
 }
@@ -348,8 +347,8 @@ body{
   border-radius: 50%;
 }
 .adframe {
-  /*position: fixed;
-  top: 100px;*/
+  position: fixed;
+  /*top: 100px;*/
   width: 200px;
   height: calc(100% - 10px);
   overflow: auto;
