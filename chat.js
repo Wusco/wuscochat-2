@@ -128,6 +128,7 @@ const firebaseConfig = {
          create_left_sidebar() {
     var leftSidebar = document.createElement('div');
     leftSidebar.setAttribute('id', 'left-sidebar');
+    leftSidebar.setAttribute('class', 'meme-container');      
     // add what you want here enzo
     leftSidebar.innerHTML = 'enzo add what you want here'; 
     leftSidebar.classList.add('left-sidebar'); 
