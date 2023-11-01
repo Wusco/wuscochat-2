@@ -313,7 +313,7 @@ body{
   background-color: #fff;
   color: #333;
   padding: 0px;
-  height: calc(100% - 240px);
+  height: calc(100% - 10px);
   overflow: auto;
 }
 
@@ -326,7 +326,7 @@ body{
   background-color: #fff;
   color: #333;
   padding: 20px;
-  height: calc(100% - 240px);
+  height: calc(100% - 10px);
   overflow: auto;
 }
 
