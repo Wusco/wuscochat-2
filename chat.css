@@ -176,7 +176,7 @@ body{
   #chat_logout_container{
     width: 100%;
     display: inline-block;
-    background-color: #d3d3d3;
+    background-color: white;
     display: flex;
     justify-content: center;
     align-items: center;
