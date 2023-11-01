@@ -347,3 +347,11 @@ body{
   height: 1em; 
   border-radius: 50%;
 }
+.adframe {
+  position: fixed;
+  top: 100px;
+  width: 200px;
+  padding: 20px;
+  height: calc(100% - 10px);
+  overflow: auto;
+}
