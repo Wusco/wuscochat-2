@@ -328,7 +328,7 @@ body{
   color: white;
   padding: 20px;
   height: calc(100% - 10px);
-  overflow: auto;
+  overflow: cut;
 }
 
 .right-sidebar ul {
