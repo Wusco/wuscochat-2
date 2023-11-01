@@ -174,9 +174,9 @@ body{
   }
 
   #chat_logout_container{
-    width: 100%;
+    width: 50%;
     display: inline-block;
-    background-color: #d3d3d3;
+    background-color: #D64045;
     display: flex;
     justify-content: center;
     align-items: center;
