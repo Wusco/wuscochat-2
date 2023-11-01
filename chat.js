@@ -144,7 +144,7 @@ const firebaseConfig = {
    // add your rules here enzo
     rules.innerHTML = `
       <li>Rule 1: No spamming or flooding the chat.</li>
-          
+      <li>Rule 2: No text art and no nsfw.</li>
           `;
 
     rightSidebar.append(rules);
