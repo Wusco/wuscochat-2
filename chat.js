@@ -137,12 +137,13 @@ const firebaseConfig = {
   create_right_sidebar() {
     var rightSidebar = document.createElement('div');
     rightSidebar.setAttribute('id', 'right-sidebar');
-    rightSidebar.innerHTML = 'WuscoChat Rules: <br>'; 
+    rightSidebar.innerHTML = 'WuscoChat Rules:'; 
     rightSidebar.classList.add('right-sidebar'); 
 
     var rules = document.createElement('ul');
    // add your rules here enzo
     rules.innerHTML = `
+      <br>
       <li>Rule 1: No spamming or flooding the chat.</li>
       <li>Rule 2: No text art and no nsfw.</li>
           `;
