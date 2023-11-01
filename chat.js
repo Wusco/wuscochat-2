@@ -148,7 +148,7 @@ const firebaseConfig = {
       <li>Rule 1: No spamming or flooding the chat.</li>
       <li>Rule 2: No text art or NSFW/NSFW links.</li>
       <br>
-      <img src="typing.jpg" alt="typing guy gif thing" width="200px" height="200">
+      <img href="https://media3.giphy.com/media/l0He4nkyI5cMhXzvW/giphy.gif" alt="typing guy gif thing" width="200px" height="200">
           `;
 
     rightSidebar.append(rules);
