@@ -174,19 +174,21 @@ body{
   }
 
   #chat_logout_container{
-    width: 50%;
+    width: 100%;
     display: inline-block;
-    background-color: #D64045;
+    background-color: #d3d3d3;
     display: flex;
     justify-content: center;
     align-items: center;
     float: left;
     margin-top: 20px;
+    border-radius: 5px;
   }
 
   #chat_logout{
     color: #D64045;
     cursor: pointer;
+    text-decoration: none;
   }
 
   #chat_logout:hover{
