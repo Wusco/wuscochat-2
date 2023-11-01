@@ -130,7 +130,7 @@ const firebaseConfig = {
     leftSidebar.setAttribute('id', 'left-sidebar');
     leftSidebar.setAttribute('class', 'meme-container');      
     // add what you want here enzo
-    leftSidebar.innerHTML = '<iframe src="https://wuscoadvertisement-485877.netlify.app/" width="200px" height="600px"></iframe>'; 
+    leftSidebar.innerHTML = '<iframe src="https://wuscoadvertisement-485877.netlify.app/" width="200px" height="650px"></iframe>'; 
     leftSidebar.classList.add('left-sidebar'); 
     document.body.append(leftSidebar);
   }
