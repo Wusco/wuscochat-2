@@ -147,9 +147,7 @@ const firebaseConfig = {
       <br>
       <li>Rule 1: No spamming or flooding the chat.</li>
       <li>Rule 2: No text art or NSFW/NSFW links.</li>
-      <li>Rule 3: No busting its nnn you must pass it.</li>
-      <br>
-      <img src="typing.gif" alt="typing guy gif thing" width="200px" height="200">
+      <li>Rule 3: No busting its NNN, you must pass it.</li>
           `;
 
     rightSidebar.append(rules);
