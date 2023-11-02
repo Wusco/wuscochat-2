@@ -26,6 +26,7 @@
 </head>
 <body>
     <script src="global.js"></script>
+    <div class="containerdiv">
     <h1>Fabricate A One Time Use Access Code</h1>
     <p>Fabricate A one-time access code to share with others.</p>
 
@@ -33,6 +34,7 @@
         <input type="text" id="access-code" placeholder="One Time Use Access Code" required>
         <button type="submit">Fabricate</button>
     </form>
+    </div>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js";
         import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.5.0/firebase-database.js";
