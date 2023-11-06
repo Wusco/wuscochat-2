@@ -29,14 +29,14 @@ function loadMessages() {
       var message = childSnapshot.val();
 
       //WIP Reload chat button
-  var reloadButton = document.createElement('button');
-      var reloadImage = document.createElement('img');
-      reloadImage.src = "https://i.ibb.co/6FqdzDz/reload.png";
-      reloadImage.alt = "Reload";
-      reloadButton.appendChild(reloadImage);
-      reloadButton.addEventListener('click', function() {
-        loadMessages();
-      });
+    //var reloadButton = document.createElement('button');
+      //var reloadImage = document.createElement('img');
+      //reloadImage.src = "https://i.ibb.co/6FqdzDz/reload.png";
+      //reloadImage.alt = "Reload";
+      //reloadButton.appendChild(reloadImage);
+      //reloadButton.addEventListener('click', function() {
+        //loadMessages();
+      //});
 
       // Create message elements
       var messageElement = document.createElement('div');
@@ -109,6 +109,7 @@ window.onload = function() {
 document.addEventListener('DOMContentLoaded', function () {
   // Your code here, including the event listener for the 'clearChatButton'
   document.getElementById('clearChatButton').addEventListener('click', clearChat);
+  document.getElementById('reloadChatButton').addEventListener('click', loadmessages);
   // Function to clear the entire chat by deleting each message
 function clearChat() {
   if (confirm('Are you sure you want to clear the chat?')) {
