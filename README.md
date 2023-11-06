@@ -1,2 +1,3 @@
-# wuscochat-new
-this is where we develop the new wusco chat
+# WuscoChat
+This is where we develop wusco chat v2.
+
