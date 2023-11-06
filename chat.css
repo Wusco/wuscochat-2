@@ -215,6 +215,11 @@ body{
     font-weight: bold;
     font-size: 14px;
   }
+    .message_user_ME{
+    font-weight: bold;
+    font-size: 14px;
+    color: #121f21;
+    }
 
   .message_content_container{
     width: 100%;
