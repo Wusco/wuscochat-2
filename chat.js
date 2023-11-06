@@ -71,7 +71,7 @@ const firebaseConfig = {
   
         var join_input = document.createElement('input')
         join_input.setAttribute('id', 'join_input')
-        join_input.setAttribute('maxlength', 20)
+        join_input.setAttribute('maxlength', 25)
         join_input.placeholder = 'User'
         // Every time we type into the join_input
         join_input.onkeyup  = function(){
@@ -142,7 +142,7 @@ const firebaseConfig = {
     rightSidebar.classList.add('right-sidebar'); 
 
     var rules = document.createElement('ul');
-   // add your rules here enzo
+   // add your rules here
     rules.innerHTML = `
       <br>
       <li>Rule 1: No spamming or flooding the chat.</li>
