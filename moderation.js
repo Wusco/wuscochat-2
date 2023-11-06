@@ -109,7 +109,7 @@ window.onload = function() {
 document.addEventListener('DOMContentLoaded', function () {
   // Your code here, including the event listener for the 'clearChatButton'
   document.getElementById('clearChatButton').addEventListener('click', clearChat);
-  document.getElementById('reloadChatButton').addEventListener('click', loadmessages);
+  //document.getElementById('reloadChatButton').addEventListener('click', loadmessages);
   // Function to clear the entire chat by deleting each message
 function clearChat() {
   if (confirm('Are you sure you want to clear the chat?')) {
