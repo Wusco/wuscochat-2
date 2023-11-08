@@ -15,7 +15,6 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.database();
 
 // Function to load the messages from Firebase
-// Function to load the messages from Firebase
 function loadMessages() {
   var messageList = document.getElementById('messageList');
 
@@ -59,7 +58,7 @@ function loadMessages() {
       });
 
       actionsElement.appendChild(editButton);
-      actionsElement.appendChild(deleteButton); // Fix here
+      actionsElement.appendChild(deleteButton);
 
       messageElement.appendChild(contentElement);
       messageElement.appendChild(actionsElement);
@@ -85,10 +84,11 @@ function deleteMessage(key) {
 }
 
 // Reload Button
-var reloadButton = document.getElementById('reloadChatButton');
+var reloadButton = document.getElementById('reloadButton');
 reloadButton.addEventListener('click', function() {
     loadMessages(); // Load the messages again when the reload button is clicked
 });
+
 // Load the messages on page load
 window.onload = function() {
   loadMessages();
@@ -98,14 +98,14 @@ document.addEventListener('DOMContentLoaded', function () {
   // Your code here, including the event listener for the 'clearChatButton'
   document.getElementById('clearChatButton').addEventListener('click', clearChat);
   // Function to clear the entire chat by deleting each message
-function clearChat() {
-  if (confirm('Are you sure you want to clear the chat?')) {
-    db.ref('chats').once('value', function (snapshot) {
-      snapshot.forEach(function (childSnapshot) {
-        var key = childSnapshot.key;
-        deleteMessage(key); // Call the deleteMessage function for each message
+  function clearChat() {
+    if (confirm('Are you sure you want to clear the chat?')) {
+      db.ref('chats').once('value', function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+          var key = childSnapshot.key;
+          deleteMessage(key); // Call the deleteMessage function for each message
+        });
       });
-    });
+    }
   }
-}
 });
