@@ -84,6 +84,11 @@ function deleteMessage(key) {
   loadMessages();
 }
 
+// Reload Button
+var reloadButton = document.getElementById('reloadChatButton');
+reloadButton.addEventListener('click', function() {
+    loadMessages(); // Load the messages again when the reload button is clicked
+});
 // Load the messages on page load
 window.onload = function() {
   loadMessages();
