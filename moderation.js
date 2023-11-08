@@ -15,13 +15,12 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.database();
 
 // Function to load the messages from Firebase
+// Function to load the messages from Firebase
 function loadMessages() {
   var messageList = document.getElementById('messageList');
 
   // Clear the message list
   messageList.innerHTML = '';
-
-  
 
   // Retrieve the messages from the database and sort them by index
   db.ref('chats').orderByChild('index').once('value', function(snapshot) {
@@ -32,9 +31,6 @@ function loadMessages() {
       var messageElement = document.createElement('div');
       messageElement.className = 'message';
 
-      //var nameElement = document.createElement('div');
-      //nameElement.textContent = 'Name: ' + message.name;
-
       var contentElement = document.createElement('div');
       contentElement.className = 'content';
       contentElement.textContent = message.name + ': ' + message.message;
@@ -42,7 +38,7 @@ function loadMessages() {
       var actionsElement = document.createElement('div');
       actionsElement.className = 'actions';
 
-      //EDIT
+      // EDIT
       var editButton = document.createElement('button');
       var editImage = document.createElement('img');
       editImage.src = "https://i.ibb.co/LSctdSw/edit-pencil.png";
@@ -52,21 +48,19 @@ function loadMessages() {
         editMessage(childSnapshot.key, message.message);
       });
 
-      //DELETE
+      // DELETE
       var deleteButton = document.createElement('button');
       var deleteImage = document.createElement('img');
       deleteImage.src = "https://i.ibb.co/zbBPWvy/trash.png";
       deleteImage.alt = "Delete";
       deleteButton.appendChild(deleteImage);
-        deleteButton.addEventListener('click', function() {
-        	deleteMessage(childSnapshot.key);
+      deleteButton.addEventListener('click', function() {
+        deleteMessage(childSnapshot.key);
       });
 
-
       actionsElement.appendChild(editButton);
-      actionsElement.appendChild(reloadButton);
+      actionsElement.appendChild(deleteButton); // Fix here
 
-      //messageElement.appendChild(nameElement);
       messageElement.appendChild(contentElement);
       messageElement.appendChild(actionsElement);
 
