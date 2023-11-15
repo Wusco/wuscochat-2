@@ -215,11 +215,6 @@ body{
     font-weight: bold;
     font-size: 14px;
   }
-    .message_user_ME{
-    font-weight: bold;
-    font-size: 14px;
-    color: #121f21;
-    }
 
   .message_content_container{
     width: 100%;
@@ -239,6 +234,7 @@ body{
     color: #fff;
     background-color: #5B7553;; /*#5B7553;*/
     cursor: pointer;
+    border-radius: 5px;
   }
 
   #title_container.chat_title_container{
