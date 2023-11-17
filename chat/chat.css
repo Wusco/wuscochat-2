@@ -369,6 +369,6 @@ body{
     transition: 0.5s;
 }
 .panic:hover{
-    background-color: #CC0000
+    background-color: #CC0000;
     border-radius: 15px;
 }
