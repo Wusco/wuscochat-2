@@ -107,8 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const hamburgerMenuIcon = document.querySelector('.hamburger-menu__icon');
       const hamburgerMenuLinks = document.querySelector('.hamburger-menu__links');
       const menuLinks = [
-        { title: 'Settings', url: 'settings.html' },
-        { title: 'Live Chat', url: 'chat.html' }
+        { title: 'Settings', url: '../settings.html' },
+        { title: 'Live Chat', url: '../chat/index.html' }
       ];
 
       const generateMenuLinks = () => {
