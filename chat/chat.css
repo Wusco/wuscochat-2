@@ -359,3 +359,10 @@ body{
   height: calc(100% - 10px);
   overflow: auto;
 }
+
+.panic{
+    background-color: #DD1010;
+    color: #000000;
+    padding: 10px;
+    border-radius: 10px;
+}
