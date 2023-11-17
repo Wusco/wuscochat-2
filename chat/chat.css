@@ -365,4 +365,5 @@ body{
     color: #000000;
     padding: 10px;
     border-radius: 10px;
+    cursor: pointer;
 }
