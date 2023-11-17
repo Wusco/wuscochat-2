@@ -148,6 +148,10 @@ const firebaseConfig = {
       <li>Rule 1: No spamming or flooding the chat.</li>
       <li>Rule 2: No text art or NSFW/NSFW links.</li>
       <li>Rule 3: No busting its NNN, you must pass it.</li>
+      <button class="panic" onclick="location.href='https://classroom.google.com'">
+        Panic Button (WIP)
+      </button>
+
           `;
 
     rightSidebar.append(rules);
