@@ -186,7 +186,7 @@ const firebaseConfig = {
         var chat_input = document.createElement('input')
         chat_input.setAttribute('id', 'chat_input')
         // Only a max message length of 500
-        chat_input.setAttribute('maxlength', 5000)
+        chat_input.setAttribute('maxlength', 10000)
         // Get the name of the user
         chat_input.placeholder = `${parent.get_name()} - Say something...`
         chat_input.onkeyup  = function(){
