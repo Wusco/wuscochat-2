@@ -362,8 +362,12 @@ body{
 
 .panic{
     background-color: #DD1010;
-    color: #000000;
+    color: #FFFFFF;
     padding: 10px;
     border-radius: 10px;
+}
+.panic:hover{
+    background-color: #CC0000
     cursor: pointer;
+    border-radius: 20px;
 }
