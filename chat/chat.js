@@ -43,7 +43,7 @@ const firebaseConfig = {
   
         var title = document.createElement('h1');
         title.setAttribute('id', 'title');
-        title.innerHTML = 'WuscoChat <img src="../logo.png" alt="Logo" class="logo">';
+        title.innerHTML = 'WuscoChat <img src="../watermark.png" alt="Logo" class="logo">';
   
         title_inner_container.append(title)
         title_container.append(title_inner_container)
