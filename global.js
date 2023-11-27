@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 // Create the loading logo image
 const img = document.createElement("img");
-img.src = "watermark.png";
+img.src = "../watermark.png";
 img.style.width = "100px";
 img.style.height = "100px";
 img.style.position = "absolute";
