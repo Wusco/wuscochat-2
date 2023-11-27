@@ -365,7 +365,7 @@ body{
     background-color: #DD1010;
     color: #FFFFFF;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
         cursor: pointer;
     transition: 0.5s ease-out;
 }
