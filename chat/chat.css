@@ -327,8 +327,8 @@ body{
   top: 100px;
   right: 0;
   width: 200px;
-  background-color: #000000;
-  color: white;
+  background-color: #FFFFFF;
+  color: black;
   padding: 20px;
   height: calc(100% - 10px);
   overflow: cut;
