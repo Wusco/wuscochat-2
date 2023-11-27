@@ -372,3 +372,8 @@ const firebaseConfig = {
       app.chat()
     }
   }
+
+function chatbot(){
+ send_message(test)
+}
+function () {setInterval(chatbot, 1000)};
