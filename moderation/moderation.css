@@ -57,7 +57,7 @@ button[type="bigred"]:hover {
   background-color: #cf0606;
 }
 
-button[type="bigblack"] {
+button[type="bigblackd"] {
   background-color: #808080;
   color: #fff;
   border: none;
@@ -67,6 +67,6 @@ button[type="bigblack"] {
   transition: background-color 0.2s ease-in-out;
 }
 
-button[type="bigblack"]:hover {
+button[type="bigblackd"]:hover {
   background-color: #d9d9d9;
 }
