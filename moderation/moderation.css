@@ -56,3 +56,17 @@ button[type="bigred"] {
 button[type="bigred"]:hover {
   background-color: #cf0606;
 }
+
+button[type="bigblack"] {
+  background-color: #808080;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button[type="bigblack"]:hover {
+  background-color: #d9d9d9;
+}
