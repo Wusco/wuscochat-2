@@ -125,7 +125,7 @@
                     document.cookie = "signed_in=true; expires=Thu, 01 Jan 2099 00:00:00 UTC; path=/";
 
                     // after signing in it redirects to the chat
-                    window.location.href = "chat.html";
+                    window.location.href = "/chat/";
                 } else {
                     // if the code doesn't exist sends them to accessdenied
                     console.log("Access denied.");
@@ -136,6 +136,8 @@
                 console.error("Error checking access code:", error);
             });
     }
+
+        
 </script>
 </body>
 </html>
