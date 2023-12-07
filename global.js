@@ -51,7 +51,7 @@ function checkAuthState() {
     const signedInCookie = document.cookie.includes("signed_in=true");
     if (!signedInCookie) {
         // User is not signed in, redirect to the sign-in page.
-        window.location.replace("wuscochat.netlify.app/signin.html");
+        window.location.replace("/signin.html");
     }
 }
 
