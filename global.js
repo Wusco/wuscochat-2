@@ -31,6 +31,7 @@ function displayCookieEnablePopup() {
     popup.style.justifyContent = 'center';
     popup.style.alignItems = 'center';
     popup.innerHTML = `
+        <h1>Hey!</h1>
         <p>Cookies are required to use this website. Please enable cookies in your browser settings.</p>
     `;
 
