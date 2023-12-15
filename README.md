@@ -1,3 +1,3 @@
 # WuscoChat New
-This is where we develop Wusco Chat v2.
+This is where we develop WuscoChat v2.
 
