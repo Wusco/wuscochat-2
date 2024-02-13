@@ -274,7 +274,7 @@ send_message(message) {
             parent.refresh_chat();
              alert("this part is working");
             // Send notification to the user for the new message
-            var notification = new Notification("New message on Wuscochat!", {
+            /*var notification = new Notification("New message on Wuscochat!", {
                 body: `${senderName}: \n${message}`,
                 icon: "watermark.png"
             });
@@ -292,7 +292,7 @@ send_message(message) {
 
                 // Close the notification if needed
                 notification.close();
-            };
+            };*/
 
             console.log("Notification sent:", `${senderName}: \n${message}`);
         });
