@@ -247,44 +247,44 @@ class MEME_CHAT {
         localStorage.setItem('name', name);
     }
 
-    // Sends message/saves the message to firebase database
-    send_message(message) {
-        var parent = this;
+   // Sends message/saves the message to firebase database
+send_message(message) {
+    var parent = this;
 
-        // if the local storage name is null and there is no message
-        // then return/don't send the message. The user is somehow hacking
-        // to send messages. Or they just deleted the
-        // localstorage themselves. But hacking sounds cooler!!
-        if (parent.get_name() == null && message == null) {
-            return;
-        }
-
-        // Get the sender's name
-        var senderName = parent.get_name();
-
-        // Get the firebase database value
-        db.ref('chats/').once('value', function (message_object) {
-            // This index is important. It will help organize the chat in order
-            var index = parseFloat(message_object.numChildren()) + 1;
-            db.ref('chats/' + `message_${index}`).set({
-                name: senderName,
-                message: message,
-                index: index
-            }).then(function () {
-                // After we send the chat refresh to get the new messages
-                parent.refresh_chat();
-
-                // Check if the user is active on the page
-                if (!document.hidden && senderName !== localStorage.getItem("name")) {
-                    // Send push notification to the user for the new message
-                    sendPushNotification(message, senderName);
-                }
-            });
-        });
-
-        // Check if the chat is open
-        //handleNotificationClick();
+    // if the local storage name is null and there is no message
+    // then return/don't send the message. The user is somehow hacking
+    // to send messages. Or they just deleted the
+    // localstorage themselves. But hacking sounds cooler!!
+    if (parent.get_name() == null && message == null) {
+        return;
     }
+
+    // Get the sender's name
+    var senderName = parent.get_name();
+
+    // Get the firebase database value
+    db.ref('chats/').once('value', function (message_object) {
+        // This index is important. It will help organize the chat in order
+        var index = parseFloat(message_object.numChildren()) + 1;
+        db.ref('chats/' + `message_${index}`).set({
+            name: senderName,
+            message: message,
+            index: index
+        }).then(function () {
+            // After we send the chat refresh to get the new messages
+            parent.refresh_chat();
+
+            // Check if the user is active on the page
+            if (!document.hidden && senderName !== localStorage.getItem("name")) {
+                // Send push notification to the user for the new message
+                sendPushNotification(message, senderName);
+            }
+        });
+    });
+
+    // Check if the chat is open
+    //handleNotificationClick();
+}
 
     // Get name. Gets the username from localStorage
     get_name() {
@@ -453,11 +453,6 @@ function sendPushNotification(message, senderName) {
         });
     }
 }
-
-// handleNotificationClick function handles the notification click
-/*function handleNotificationClick() {
-    // do what you want here
-}*/
 
 // The variable MEME_CHAT is our entire application.
 var meme_chat = new MEME_CHAT();
