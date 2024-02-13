@@ -247,7 +247,6 @@ class MEME_CHAT {
         localStorage.setItem('name', name);
     }
 
-   // Sends message/saves the message to firebase database
 // Sends message/saves the message to firebase database
 send_message(message) {
     var parent = this;
@@ -278,10 +277,71 @@ send_message(message) {
             // Check if the user is active on the page
             if (senderName !== localStorage.getItem("name")) {
                 // Send push notification to the user for the new message
-                sendPushNotification(message, senderName);
+                if ("Notification" in window) {
+                    if (Notification.permission === "granted") {
+                        // Create the notification
+                        var notification = new Notification("New message on Wuscochat!", {
+                            body: `${senderName}: \n${message}`,
+                            icon: "watermark.png"
+                        });
+
+                        // Listen for the notification click event
+                        notification.onclick = function (event) {
+                            var currentTime = new Date().getTime();
+
+                            // Redirect the user to the chat page URL
+                            var chatWindow = window.open('https://wuscochat.netlify.app/chat/', '_blank');
+                            // If the chat window is already open, focus on it
+                            if (chatWindow) {
+                                chatWindow.focus();
+                            }
+
+                            // Close the notification if needed
+                            notification.close();
+                        };
+
+                        console.log("Notification sent:", `${senderName}: \n${message}`);
+                    } else if (Notification.permission !== 'denied') {
+                        // Ask the user for permission to send notifications
+                        Notification.requestPermission(function (permission) {
+                            // If the user accepts, send the notification 
+                            if (permission === "granted") {
+                                // Create the notification
+                                var notification = new Notification("New message on Wuscochat!!!", {
+                                    body: `${senderName}: \n${message}`,
+                                    icon: "watermark.png"
+                                });
+
+                                // Listen for the notification click event
+                                notification.onclick = function (event) {
+                                    var currentTime = new Date().getTime();
+
+                                    // Redirect the user to the chat page URL
+                                    var chatWindow = window.open('https://wuscochat.netlify.app/chat/', '_blank');
+                                    // If the chat window is already open, focus on it
+                                    if (chatWindow) {
+                                        chatWindow.focus();
+                                    }
+
+                                    // Close the notification if needed
+                                    notification.close();
+                                };
+
+                                console.log("Notification sent:", `${senderName}: \n${message}`);
+                            }
+                        });
+                    }
+                } else {
+                    console.log("This browser does not support desktop notification");
+                }
             }
         });
     });
+
+    // Check if the chat is open
+    //handleNotificationClick();
+}
+
 }
     // Get name. Gets the username from localStorage
     get_name() {
@@ -371,51 +431,6 @@ send_message(message) {
             chat_content_container.scrollTop = chat_content_container.scrollHeight;
         });
     }
-}
-
-// Firebase has this push notification on its site
-function sendPushNotification(message, senderName) {
-    // Check for notification support
-    if (!("Notification" in window)) {
-        console.log("This browser does not support desktop notification");
-        return;
-    }
-
-    // Request permission for notifications if not granted or denied
-    if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
-        Notification.requestPermission().then(function (permission) {
-            if (permission === "granted") {
-                createNotification(message, senderName);
-            }
-        });
-    } else if (Notification.permission === 'granted') {
-        createNotification(message, senderName);
-    }
-}
-
-// Function to create and show the notification
-function createNotification(message, senderName) {
-    var notification = new Notification("New message on Wuscochat!", {
-        body: `${senderName}: \n${message}`,
-        icon: "watermark.png"
-    });
-
-    // Listen for the notification click event
-    notification.onclick = function (event) {
-        var currentTime = new Date().getTime();
-
-        // Redirect the user to the chat page URL
-        var chatWindow = window.open('https://wuscochat.netlify.app/chat/', '_blank');
-        // If the chat window is already open, focus on it
-        if (chatWindow) {
-            chatWindow.focus();
-        }
-
-        // Close the notification if needed
-        notification.close();
-    };
-
-    console.log("Notification sent:", `${senderName}: \n${message}`);
 }
 
 // The variable MEME_CHAT is our entire application.
