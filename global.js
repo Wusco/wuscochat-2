@@ -60,6 +60,28 @@ function checkAuthState() {
 document.addEventListener("DOMContentLoaded", function() {
     checkAuthState();
 });
+
+// Function to request permission to show notifications
+function requestNotificationPermission() {
+    // Check if the browser supports notifications
+    if ('Notification' in window) {
+        Notification.requestPermission().then(function (permission) {
+            if (permission === 'granted') {
+                alert('Notification permission granted.');
+            } else if (permission === 'denied') {
+                alert('Notification permission denied. You may not receive notifications for new messages.');
+            } else {
+                alert('Notification permission has not been requested yet.');
+            }
+        });
+    } else {
+        alert('This browser does not support notifications.');
+    }
+}
+
+// Call the function to request permission for notifications
+requestNotificationPermission();
+
 // Create the loading logo image
 const img = document.createElement("img");
 img.src = "../watermark.png";
