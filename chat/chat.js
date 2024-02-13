@@ -455,3 +455,76 @@ var app = new MEME_CHAT()
 if (app.get_name() != null) {
     app.chat()
 }
+// Your code for sending notifications
+function sendPushNotification(message, senderName) {
+    // Check for notification support
+    if (!("Notification" in window)) {
+        console.log("This browser does not support desktop notification");
+        return;
+    }
+
+    // Initialize a variable to keep track of the last click timestamp
+    var lastClickTimestamp = 0;
+
+    // Check if the user has granted permission for notifications
+    if (Notification.permission === "granted") {
+        // Create the notification
+        var notification = new Notification("New message on Wuscochat!", {
+            body: `${senderName}: \n${message}`,
+            icon: "watermark.png"
+        });
+
+        // Listen for the notification click event
+        notification.onclick = function (event) {
+            var currentTime = new Date().getTime();
+
+            // Check if the time difference between the current click and the last click is less than 300 milliseconds
+            if (currentTime - lastClickTimestamp < 300) {
+                // Redirect the user to the chat page URL
+                var chatWindow = window.open('https://wuscochat.netlify.app/chat/', '_blank');
+                // If the chat window is already open, focus on it
+                if (chatWindow) {
+                    chatWindow.focus();
+                }
+            }
+
+            // Update the last click timestamp to the current time
+            lastClickTimestamp = currentTime;
+
+            // Close the notification if needed
+            notification.close();
+        };
+    } else if (Notification.permission !== 'denied') {
+        // Ask the user for permission to send notifications
+        Notification.requestPermission(function (permission) {
+            // If the user accepts, send the notification 
+            if (permission === "granted") {
+                var notification = new Notification("New message on Wuscochat!!!", {
+                    body: `${senderName}: \n${message}`,
+                    icon: "watermark.png"
+                });
+
+                // Listen for the notification click event
+                notification.onclick = function (event) {
+                    var currentTime = new Date().getTime();
+
+                    // Check if the time difference between the current click and the last click is less than 300 milliseconds
+                    if (currentTime - lastClickTimestamp < 300) {
+                        // Redirect the user to the chat page URL
+                        var chatWindow = window.open('https://wuscochat.netlify.app/chat/', '_blank');
+                        // If the chat window is already open, focus on it
+                        if (chatWindow) {
+                            chatWindow.focus();
+                        }
+                    }
+
+                    // Update the last click timestamp to the current time
+                    lastClickTimestamp = currentTime;
+
+                    // Close the notification if needed
+                    notification.close();
+                };
+            }
+        });
+    }
+}
