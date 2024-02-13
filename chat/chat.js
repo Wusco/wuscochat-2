@@ -388,7 +388,7 @@ function sendPushNotification(message, senderName) {
     var lastClickTimestamp = 0;
 
     // Check if the user has granted permission for notifications
-    //if (Notification.permission === "granted") {
+      if (True) {
         // Create the notification
         var notification = new Notification("New message on Wuscochat!", {
             body: `${senderName}: \n${message}`,
