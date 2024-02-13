@@ -246,7 +246,6 @@ class MEME_CHAT {
         // Save name to localStorage
         localStorage.setItem('name', name);
     }
-
 // Sends message/saves the message to firebase database
 send_message(message) {
     var parent = this;
@@ -340,8 +339,6 @@ send_message(message) {
 
     // Check if the chat is open
     //handleNotificationClick();
-}
-
 }
     // Get name. Gets the username from localStorage
     get_name() {
