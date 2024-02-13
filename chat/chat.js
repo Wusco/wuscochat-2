@@ -248,6 +248,7 @@ class MEME_CHAT {
     }
 
    // Sends message/saves the message to firebase database
+// Sends message/saves the message to firebase database
 send_message(message) {
     var parent = this;
 
@@ -281,11 +282,7 @@ send_message(message) {
             }
         });
     });
-
-    // Check if the chat is open
-    //handleNotificationClick();
 }
-
     // Get name. Gets the username from localStorage
     get_name() {
         // Get the name from localstorage
@@ -384,63 +381,42 @@ function sendPushNotification(message, senderName) {
         return;
     }
 
-    // Check if the user has granted permission for notifications
-    if (Notification.permission === 'granted') {
-        // Create the notification
-        var notification = new Notification("New message on Wuscochat!", {
-            body: `${senderName}: \n${message}`,
-            icon: "watermark.png"
-        });
-
-        // Listen for the notification click event
-        notification.onclick = function(event) {
-            var currentTime = new Date().getTime();
-            console.log("Notification clicked at:", currentTime);
-
-            // Redirect the user to the chat page URL
-            var chatWindow = window.open('https://wuscochat.netlify.app/chat/', '_blank');
-            // If the chat window is already open, focus on it
-            if (chatWindow) {
-                chatWindow.focus();
-            }
-
-            // Close the notification if needed
-            notification.close();
-        };
-
-        console.log("Notification sent:", `${senderName}: \n${message}`);
-    } else if (Notification.permission !== 'denied') {
-        // Ask the user for permission to send notifications
-        Notification.requestPermission(function(permission) {
-            // If the user accepts, send the notification 
-            if (permission === 'granted') {
-                var notification = new Notification("New message on Wuscochat!!!", {
-                    body: `${senderName}: \n${message}`,
-                    icon: "watermark.png"
-                });
-
-                // Listen for the notification click event
-                notification.onclick = function(event) {
-                    var currentTime = new Date().getTime();
-                    console.log("Notification clicked at:", currentTime);
-
-                    // Redirect the user to the chat page URL
-                    var chatWindow = window.open('https://wuscochat.netlify.app/chat/', '_blank');
-                    // If the chat window is already open, focus on it
-                    if (chatWindow) {
-                        chatWindow.focus();
-                    }
-
-                    // Close the notification if needed
-                    notification.close();
-                };
-
-                console.log("Notification sent:", `${senderName}: \n${message}`);
+    // Request permission for notifications if not granted or denied
+    if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+        Notification.requestPermission().then(function (permission) {
+            if (permission === "granted") {
+                createNotification(message, senderName);
             }
         });
+    } else if (Notification.permission === 'granted') {
+        createNotification(message, senderName);
     }
 }
 
+// Function to create and show the notification
+function createNotification(message, senderName) {
+    var notification = new Notification("New message on Wuscochat!", {
+        body: `${senderName}: \n${message}`,
+        icon: "watermark.png"
+    });
+
+    // Listen for the notification click event
+    notification.onclick = function (event) {
+        var currentTime = new Date().getTime();
+
+        // Redirect the user to the chat page URL
+        var chatWindow = window.open('https://wuscochat.netlify.app/chat/', '_blank');
+        // If the chat window is already open, focus on it
+        if (chatWindow) {
+            chatWindow.focus();
+        }
+
+        // Close the notification if needed
+        notification.close();
+    };
+
+    console.log("Notification sent:", `${senderName}: \n${message}`);
+}
 
 // The variable MEME_CHAT is our entire application.
 var meme_chat = new MEME_CHAT();
