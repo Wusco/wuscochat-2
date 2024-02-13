@@ -450,9 +450,9 @@ function sendPushNotification(message, senderName) {
 }
 
 // handleNotificationClick function handles the notification click
-function handleNotificationClick() {
+/*function handleNotificationClick() {
     // do what you want here
-}
+}*/
 
 // The variable MEME_CHAT is our entire application.
 var meme_chat = new MEME_CHAT();
