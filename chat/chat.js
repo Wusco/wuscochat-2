@@ -146,8 +146,7 @@ const firebaseConfig = {
     rules.innerHTML = `
       <br>
       <li>Rule 1: No spamming or flooding the chat.</li>
-      <li>Rule 2: No text art or NSFW/NSFW links.</li>
-      <li>Rule 3: No busting its NNN, you must pass it.</li>
+      <li>Rule 2: No text art</li>
       <button class="panic" onclick="location.href='https://classroom.google.com'">
         Panic Button
       </button>
@@ -245,31 +244,37 @@ const firebaseConfig = {
         localStorage.setItem('name', name)
       }
       // Sends message/saves the message to firebase database
-      send_message(message){
-        var parent = this
-        // if the local storage name is null and there is no message
-        // then return/don't send the message. The user is somehow hacking
-        // to send messages. Or they just deleted the
-        // localstorage themselves. But hacking sounds cooler!!
-        if(parent.get_name() == null && message == null){
-          return
-        }
-  
-        // Get the firebase database value
-        db.ref('chats/').once('value', function(message_object) {
-          // This index is mortant. It will help organize the chat in order
-          var index = parseFloat(message_object.numChildren()) + 1
-          db.ref('chats/' + `message_${index}`).set({
+send_message(message){
+    var parent = this;
+
+    // if the local storage name is null and there is no message
+    // then return/don't send the message. The user is somehow hacking
+    // to send messages. Or they just deleted the
+    // localstorage themselves. But hacking sounds cooler!!
+    if(parent.get_name() == null && message == null){
+        return;
+    }
+
+    // Get the firebase database value
+    db.ref('chats/').once('value', function(message_object) {
+        // This index is mortant. It will help organize the chat in order
+        var index = parseFloat(message_object.numChildren()) + 1;
+        db.ref('chats/' + `message_${index}`).set({
             name: parent.get_name(),
             message: message,
             index: index
-          })
-          .then(function(){
+        }).then(function(){
             // After we send the chat refresh to get the new messages
-            parent.refresh_chat()
-          })
-        })
-      }
+            parent.refresh_chat();
+
+            // Check if the user is active on the page
+            if (!isPageVisible() && !checkLocalStorageForUserName()) {
+                // Send push notification to the user for the new message
+                sendPushNotification(message);
+            }
+        });
+    });
+}
       // Get name. Gets the username from localStorage
       get_name(){
         // Get the name from localstorage
