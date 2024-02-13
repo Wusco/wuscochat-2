@@ -376,7 +376,7 @@ class MEME_CHAT {
     }
 }
 
-// Firebase has this push notification on it's site
+// Firebase has this push notification on its site
 function sendPushNotification(message, senderName) {
     // Check for notification support
     if (!("Notification" in window)) {
@@ -415,6 +415,8 @@ function sendPushNotification(message, senderName) {
             // Close the notification if needed
             notification.close();
         };
+
+        console.log("Notification sent:", `${senderName}: \n${message}`);
     } else if (Notification.permission !== 'denied') {
         // Ask the user for permission to send notifications
         Notification.requestPermission(function (permission) {
@@ -445,6 +447,8 @@ function sendPushNotification(message, senderName) {
                     // Close the notification if needed
                     notification.close();
                 };
+
+                console.log("Notification sent:", `${senderName}: \n${message}`);
             }
         });
     }
