@@ -272,7 +272,7 @@ send_message(message) {
         }).then(function () {
             // After we send the chat refresh to get the new messages
             parent.refresh_chat();
-
+             alert("this part is working");
             // Send notification to the user for the new message
             var notification = new Notification("New message on Wuscochat!", {
                 body: `${senderName}: \n${message}`,
