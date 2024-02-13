@@ -278,6 +278,7 @@ send_message(message) {
                 // Send push notification to the user for the new message
                 if ("Notification" in window) {
                     if (Notification.permission === "granted") {
+                        alert("the error is deep inside");
                         // Create the notification
                         var notification = new Notification("New message on Wuscochat!", {
                             body: `${senderName}: \n${message}`,
