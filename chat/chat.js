@@ -272,6 +272,7 @@ send_message(message) {
         }).then(function () {
             // After we send the chat refresh to get the new messages
             parent.refresh_chat();
+            // this is a test notification pls do not use this in production
              //alert("this part is working");
             // Send notification to the user for the new message
             /*var notification = new Notification("New message on Wuscochat!", {
@@ -294,7 +295,7 @@ send_message(message) {
                 notification.close();
             };*/
 
-            console.log("Notification sent:", `${senderName}: \n${message}`);
+            //console.log("Notification sent:", `${senderName}: \n${message}`);
         });
     });
 
