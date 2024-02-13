@@ -1,3 +1,4 @@
+document.addEventListener('DOMContentLoaded', function () {
 // Your web app's Firebase configuration
 const firebaseConfig = {
     apiKey: "AIzaSyADU9mE19sCAgybueA1CjB4pGMa7ALN0-M",
@@ -463,3 +464,4 @@ if (localStorage.getItem('name') == null) {
 } else {
     meme_chat.chat();
 }
+});
