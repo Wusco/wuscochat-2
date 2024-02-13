@@ -275,7 +275,7 @@ send_message(message) {
             parent.refresh_chat();
 
             // Check if the user is active on the page
-            if (!document.hidden && senderName !== localStorage.getItem("name")) {
+            if (senderName !== localStorage.getItem("name")) {
                 // Send push notification to the user for the new message
                 sendPushNotification(message, senderName);
             }
