@@ -273,68 +273,28 @@ send_message(message) {
             // After we send the chat refresh to get the new messages
             parent.refresh_chat();
 
-            // Check if the user is active on the page
-            if (senderName !== localStorage.getItem("name")) {
-                // Send push notification to the user for the new message
-                if ("Notification" in window) {
-                    if (Notification.permission === "granted") {
-                        alert("the error is deep inside");
-                        // Create the notification
-                        var notification = new Notification("New message on Wuscochat!", {
-                            body: `${senderName}: \n${message}`,
-                            icon: "watermark.png"
-                        });
+            // Send notification to the user for the new message
+            var notification = new Notification("New message on Wuscochat!", {
+                body: `${senderName}: \n${message}`,
+                icon: "watermark.png"
+            });
 
-                        // Listen for the notification click event
-                        notification.onclick = function (event) {
-                            var currentTime = new Date().getTime();
+            // Listen for the notification click event
+            notification.onclick = function (event) {
+                var currentTime = new Date().getTime();
 
-                            // Redirect the user to the chat page URL
-                            var chatWindow = window.open('https://wuscochat.netlify.app/chat/', '_blank');
-                            // If the chat window is already open, focus on it
-                            if (chatWindow) {
-                                chatWindow.focus();
-                            }
-
-                            // Close the notification if needed
-                            notification.close();
-                        };
-
-                        console.log("Notification sent:", `${senderName}: \n${message}`);
-                    } else if (Notification.permission !== 'denied') {
-                        // Ask the user for permission to send notifications
-                        Notification.requestPermission(function (permission) {
-                            // If the user accepts, send the notification 
-                            if (permission === "granted") {
-                                // Create the notification
-                                var notification = new Notification("New message on Wuscochat!!!", {
-                                    body: `${senderName}: \n${message}`,
-                                    icon: "watermark.png"
-                                });
-
-                                // Listen for the notification click event
-                                notification.onclick = function (event) {
-                                    var currentTime = new Date().getTime();
-
-                                    // Redirect the user to the chat page URL
-                                    var chatWindow = window.open('https://wuscochat.netlify.app/chat/', '_blank');
-                                    // If the chat window is already open, focus on it
-                                    if (chatWindow) {
-                                        chatWindow.focus();
-                                    }
-
-                                    // Close the notification if needed
-                                    notification.close();
-                                };
-
-                                console.log("Notification sent:", `${senderName}: \n${message}`);
-                            }
-                        });
-                    }
-                } else {
-                    console.log("This browser does not support desktop notification");
+                // Redirect the user to the chat page URL
+                var chatWindow = window.open('https://wuscochat.netlify.app/chat/', '_blank');
+                // If the chat window is already open, focus on it
+                if (chatWindow) {
+                    chatWindow.focus();
                 }
-            }
+
+                // Close the notification if needed
+                notification.close();
+            };
+
+            console.log("Notification sent:", `${senderName}: \n${message}`);
         });
     });
 
