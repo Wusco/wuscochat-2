@@ -447,14 +447,6 @@ function sendPushNotification(message, senderName) {
 
     }
 }
-// So we've "built" our app. Let's make it work!!
-var app = new MEME_CHAT()
-// If we have a name stored in localStorage.
-// Then use that name. Otherwise , if not.
-// Go to home.
-if (app.get_name() != null) {
-    app.chat()
-}
 // Your code for sending notifications
 function sendPushNotification(message, senderName) {
     // Check for notification support
@@ -527,4 +519,12 @@ function sendPushNotification(message, senderName) {
             }
         });
     }
+}
+// So we've "built" our app. Let's make it work!!
+var app = new MEME_CHAT()
+// If we have a name stored in localStorage.
+// Then use that name. Otherwise , if not.
+// Go to home.
+if (app.get_name() != null) {
+    app.chat()
 }
