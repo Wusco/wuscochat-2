@@ -67,7 +67,7 @@ function requestNotificationPermission() {
     if ('Notification' in window) {
         Notification.requestPermission().then(function (permission) {
             if (permission === 'granted') {
-                alert('Notification permission granted.');
+                console.log("Notification permission enabled you will now recive messages if i fixed the code");
             } else if (permission === 'denied') {
                 alert('Notification permission denied. You may not receive notifications for new messages.');
             } else {
