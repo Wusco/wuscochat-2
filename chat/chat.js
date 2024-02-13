@@ -244,36 +244,97 @@ const firebaseConfig = {
         localStorage.setItem('name', name)
       }
       // Sends message/saves the message to firebase database
-send_message(message){
+
+     // Your code for sending notifications
+function sendPushNotification(message) {
+    // Check for notification support
+    if (!("Notification" in window)) {
+        console.log("This browser does not support desktop notification");
+        return;
+    }
+
+    // Check if the user has granted permission for notifications
+    if (Notification.permission === "granted") {
+        // Create the notification
+        var notification = new Notification("New message on Wuscochat!", {
+            body: message,
+            icon: "watermark.png"
+        });
+
+        // Listen for the notification click event
+        notification.onclick = function(event) {
+            // Redirect the user to the chat page URL
+            var chatWindow = window.open('https://wuscochat.netlify.app/chat/', '_blank');
+            // If the chat window is already open, focus on it
+            if (chatWindow) {
+                chatWindow.focus();
+            }
+            // Close the notification if needed
+            notification.close();
+        };
+    } else if (Notification.permission !== 'denied') {
+        // Ask the user for permission to send notifications
+        Notification.requestPermission(function (permission) {
+            // If the user accepts, send the notification
+            if (permission === "granted") {
+                var notification = new Notification("New message on Wuscochat!", {
+                    body: message,
+                    icon: "watermark.png"
+                });
+
+                // Listen for the notification click event
+                notification.onclick = function(event) {
+                    // Redirect the user to the chat page URL
+                    var chatWindow = window.open('https://wuscochat.netlify.app/chat/', '_blank');
+                    // If the chat window is already open, focus on it
+                    if (chatWindow) {
+                        chatWindow.focus();
+                    }
+                    // Close the notification if needed
+                    notification.close();
+                };
+            }
+        });
+    }
+}
+
+// Function to send message and check if the chat is open
+function send_message(message) {
     var parent = this;
 
     // if the local storage name is null and there is no message
     // then return/don't send the message. The user is somehow hacking
     // to send messages. Or they just deleted the
     // localstorage themselves. But hacking sounds cooler!!
-    if(parent.get_name() == null && message == null){
+    if (parent.get_name() == null && message == null) {
         return;
     }
 
+    // Get the sender's name
+    var senderName = parent.get_name();
+
     // Get the firebase database value
     db.ref('chats/').once('value', function(message_object) {
-        // This index is mortant. It will help organize the chat in order
+        // This index is important. It will help organize the chat in order
         var index = parseFloat(message_object.numChildren()) + 1;
         db.ref('chats/' + `message_${index}`).set({
-            name: parent.get_name(),
+            name: senderName,
             message: message,
             index: index
-        }).then(function(){
+        }).then(function() {
             // After we send the chat refresh to get the new messages
             parent.refresh_chat();
 
             // Check if the user is active on the page
-            if (!isPageVisible() && !checkLocalStorageForUserName()) {
+            if (!document.hidden && senderName !== localStorage.getItem("name")) {
                 // Send push notification to the user for the new message
-                sendPushNotification(message);
+                sendPushNotification(message, senderName);
             }
         });
     });
+
+    // Check if the chat is open
+    handleLogoDoubleClick();
 }
       // Get name. Gets the username from localStorage
       get_name(){
