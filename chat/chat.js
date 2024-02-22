@@ -382,14 +382,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 serverSelector.appendChild(option);
             });
 
-            // Add event listener to update server and refresh chat when the server is changed
-            serverSelector.addEventListener('change', function () {
-                var currentServer = this.value;
-                localStorage.setItem('selectedServer', currentServer);
-                localStorage.setItem('currentServerName', `${currentServer} Box`); // Save the current server name
-                //document.getElementById("serverboxheader").textContent = `${currentServer} Box`; // Update the h1 element
-                refreshChat();
-            });
+           // Add event listener to update server and refresh chat when the server is changed
+serverSelector.addEventListener('change', function () {
+    var currentServer = this.value;
+    localStorage.setItem('selectedServer', currentServer);
+    localStorage.setItem('currentServerName', `${currentServer} Box`); // Save the current server name
+    document.getElementById("serverboxheader").textContent = `${currentServer} Box`; // Update the h1 element
+    chat.refresh_chat(); // Corrected function call to refresh the chat
+});
 
             // Append the server selector to the chat container
             var chatContainer = document.getElementById('chat_container');
