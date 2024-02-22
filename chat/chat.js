@@ -290,82 +290,80 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         // Refresh chat gets the message/chat data from firebase
-        refresh_chat() {
-            var chat_content_container = document.getElementById('chat_content_container');
+refresh_chat() {
+    var chat_content_container = document.getElementById('chat_content_container');
+    var currentServer = localStorage.getItem('selectedServer') || 'General'; // Get the current server from local storage
 
-            // Get the chats from firebase
-            db.ref('chats/').on('value', function (messages_object) {
-                // When we get the data clear chat_content_container
-                chat_content_container.innerHTML = '';
-                // if there are no messages in the chat. Return. Don't load anything
-                if (messages_object.numChildren() == 0) {
-                    return;
-                }
-
-                // OK! SO IF YOU'RE A ROOKIE CODER. THIS IS GOING TO BE
-                // SUPER EASY-ISH! I THINK. MAYBE NOT. WE'LL SEE!
-
-                // convert the message object values to an array.
-                var messages = Object.values(messages_object.val());
-                var guide = []; // this will be our guide to organizing the messages
-                var unordered = []; // unordered messages
-                var ordered = []; // we're going to order these messages
-
-                for (var i, i = 0; i < messages.length; i++) {
-                    // The guide is simply an array from 0 to the messages.length
-                    guide.push(i + 1);
-                    // unordered is the [message, index_of_the_message]
-                    unordered.push([messages[i], messages[i].index]);
-                }
-
-                // Now this is straight up from stack overflow 🤣
-                // Sort the unordered messages by the guide
-                guide.forEach(function (key) {
-                    var found = false;
-                    unordered = unordered.filter(function (item) {
-                        if (!found && item[1] == key) {
-                            // Now push the ordered messages to ordered array
-                            ordered.push(item[0]);
-                            found = true;
-                            return false;
-                        } else {
-                            return true;
-                        }
-                    });
-                });
-
-                // Now we're done. Simply display the ordered messages
-                ordered.forEach(function (data) {
-                    var name = data.name;
-                    var message = data.message;
-
-                    var message_container = document.createElement('div');
-                    message_container.setAttribute('class', 'message_container');
-
-                    var message_inner_container = document.createElement('div');
-                    message_inner_container.setAttribute('class', 'message_inner_container');
-
-                    var message_user_container = document.createElement('div');
-                    message_user_container.setAttribute('class', 'message_user_container');
-
-                    var message_user = document.createElement('div');
-                    message_user.setAttribute('class', 'message_user');
-                    message_user.textContent = name;
-
-                    var message_message = document.createElement('div');
-                    message_message.setAttribute('class', 'message_message');
-                    message_message.textContent = message;
-
-                    message_user_container.append(message_user);
-                    message_inner_container.append(message_user_container, message_message);
-                    message_container.append(message_inner_container);
-                    chat_content_container.append(message_container);
-                });
-
-                // Here we are getting the messages in a timely manner
-                chat_content_container.scrollTop = chat_content_container.scrollHeight;
-            });
+    // Get the chats from the current server in firebase
+    db.ref(`chats/${currentServer}`).on('value', function (messages_object) {
+        // When we get the data clear chat_content_container
+        chat_content_container.innerHTML = '';
+        // if there are no messages in the chat. Return. Don't load anything
+        if (messages_object.numChildren() == 0) {
+            return;
         }
+
+        // Convert the message object values to an array.
+        var messages = Object.values(messages_object.val());
+        var guide = []; // this will be our guide to organizing the messages
+        var unordered = []; // unordered messages
+        var ordered = []; // we're going to order these messages
+
+        for (var i, i = 0; i < messages.length; i++) {
+            // The guide is simply an array from 0 to the messages.length
+            guide.push(i + 1);
+            // unordered is the [message, index_of_the_message]
+            unordered.push([messages[i], messages[i].index]);
+        }
+
+        // Now this is straight up from stack overflow
+        // Sort the unordered messages by the guide
+        guide.forEach(function (key) {
+            var found = false;
+            unordered = unordered.filter(function (item) {
+                if (!found && item[1] == key) {
+                    // Now push the ordered messages to ordered array
+                    ordered.push(item[0]);
+                    found = true;
+                    return false;
+                } else {
+                    return true;
+                }
+            });
+        });
+
+        // Now we're done. Simply display the ordered messages
+        ordered.forEach(function (data) {
+            var name = data.name;
+            var message = data.message;
+
+            var message_container = document.createElement('div');
+            message_container.setAttribute('class', 'message_container');
+
+            var message_inner_container = document.createElement('div');
+            message_inner_container.setAttribute('class', 'message_inner_container');
+
+            var message_user_container = document.createElement('div');
+            message_user_container.setAttribute('class', 'message_user_container');
+
+            var message_user = document.createElement('div');
+            message_user.setAttribute('class', 'message_user');
+            message_user.textContent = name;
+
+            var message_message = document.createElement('div');
+            message_message.setAttribute('class', 'message_message');
+            message_message.textContent = message;
+
+            message_user_container.append(message_user);
+            message_inner_container.append(message_user_container, message_message);
+            message_container.append(message_inner_container);
+            chat_content_container.append(message_container);
+        });
+
+        // Here we are getting the messages in a timely manner
+        chat_content_container.scrollTop = chat_content_container.scrollHeight;
+    });
+}
 
         // Function to initialize the server selector dropdown
         initializeServerSelector() {
