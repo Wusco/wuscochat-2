@@ -377,7 +377,7 @@ serverSelector.addEventListener('change', function () {
     var currentServer = this.value;
     localStorage.setItem('selectedServer', currentServer);
     localStorage.setItem('currentServerName', `${currentServer} Box`); // Save the current server name
-    document.getElementById("serverboxheader").textContent = `${currentServer} Box`; // Update the h1 element
+    //document.getElementById("serverboxheader").textContent = `${currentServer} Box`; // Update the h1 element
     chat.refresh_chat(); // Corrected function call to refresh the chat
 });
 
