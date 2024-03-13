@@ -81,16 +81,17 @@ document.addEventListener('DOMContentLoaded', function () {
                     join_button.classList.add('enabled');
                     // Allow the user to click the button
                     join_button.onclick = function () {
-                        // Save the name to local storage. Passing in
-                        // the join_input.value
-                        parent.save_name(join_input.value);
-                        // Remove the join_container. So the site doesn't look weird.
-                        join_container.remove();
-                        // parent = this. But it is not the join_button
-                        // It is (MEME_CHAT = this).
-                        parent.create_chat();
-                        location.reload();
-                    };
+    alert("Join button clicked"); // Add logging to check if the button click event is triggered
+    var username = join_input.value.trim();
+    if (username.length > 2) {
+        parent.save_name(username);
+        join_container.remove();
+        parent.create_chat();
+        location.reload();
+    } else {
+        alert("Username must be at least 3 characters long.");
+    }
+};
                 } else {
                     // If the join_input is empty then turn off the
                     // join button
