@@ -166,86 +166,82 @@ document.addEventListener('DOMContentLoaded', function () {
             document.body.append(rightSidebar);
         }
 
-        // create_chat() creates the chat container and stuff
         create_chat() {
-            // Again! You need to have (parent = this)
-            var parent = this;
-            // GET THAT MEMECHAT HEADER OUTTA HERE
-            var title_container = document.getElementById('title_container');
-            var title = document.getElementById('title');
-            title_container.classList.add('chat_title_container');
-            // Make the title smaller by making it 'chat_title'
-            title.classList.add('chat_title');
+    // Again! You need to have (parent = this)
+    var parent = this;
+    // GET THAT MEMECHAT HEADER OUTTA HERE
+    var title_container = document.getElementById('title_container');
+    var title = document.getElementById('title');
+    title_container.classList.add('chat_title_container');
+    // Make the title smaller by making it 'chat_title'
+    title.classList.add('chat_title');
 
-            var chat_container = document.createElement('div');
-            chat_container.setAttribute('id', 'chat_container');
+    var chat_container = document.createElement('div');
+    chat_container.setAttribute('id', 'chat_container');
 
-            var chat_inner_container = document.createElement('div');
-            chat_inner_container.setAttribute('id', 'chat_inner_container');
+    var chat_inner_container = document.createElement('div');
+    chat_inner_container.setAttribute('id', 'chat_inner_container');
 
-            var chat_content_container = document.createElement('div');
-            chat_content_container.setAttribute('id', 'chat_content_container');
+    var chat_content_container = document.createElement('div');
+    chat_content_container.setAttribute('id', 'chat_content_container');
 
-            var chat_input_container = document.createElement('div');
-            chat_input_container.setAttribute('id', 'chat_input_container');
+    var chat_input_container = document.createElement('div');
+    chat_input_container.setAttribute('id', 'chat_input_container');
 
-            var chat_input_send = document.createElement('button');
-            chat_input_send.setAttribute('id', 'chat_input_send');
-            chat_input_send.setAttribute('disabled', true);
-            chat_input_send.innerHTML = `<i class="far fa-paper-plane"></i>`;
+    var chat_input_send = document.createElement('button');
+    chat_input_send.setAttribute('id', 'chat_input_send');
+    chat_input_send.setAttribute('disabled', true);
+    chat_input_send.innerHTML = `<i class="far fa-paper-plane"></i>`;
 
-            var chat_input = document.createElement('input');
-            chat_input.setAttribute('id', 'chat_input');
-            // Only a max message length of 500
-            chat_input.setAttribute('maxlength', 10000);
-            // Get the name of the user
-            chat_input.placeholder = `${parent.get_name()} - Say something...`;
-            chat_input.onkeyup = function () {
-                if (chat_input.value.length > 0) {
-                    chat_input_send.removeAttribute('disabled');
-                    chat_input_send.classList.add('enabled');
-                    chat_input_send.onclick = function () {
-                        chat_input_send.setAttribute('disabled', true);
-                        chat_input_send.classList.remove('enabled');
-                        if (chat_input.value.length <= 0) {
-                            return;
-                        }
-                        // Enable the loading circle in the 'chat_content_container'
-                        parent.create_load('chat_content_container');
-                        // Send the message. Pass in the chat_input.value
-                        parent.send_message(chat_input.value);
-                        // Clear the chat input box
-                        chat_input.value = '';
-                        // Focus on the input just after
-                        chat_input.focus();
-                    };
-                } else {
-                    chat_input_send.classList.remove('enabled');
+    var chat_input = document.createElement('input');
+    chat_input.setAttribute('id', 'chat_input');
+    // Only a max message length of 500
+    chat_input.setAttribute('maxlength', 10000);
+    // Get the name of the user
+    chat_input.placeholder = `${parent.get_name()} - Say something...`;
+    chat_input.onkeyup = function () {
+        if (chat_input.value.length > 0) {
+            chat_input_send.removeAttribute('disabled');
+            chat_input_send.classList.add('enabled');
+            chat_input_send.onclick = function () {
+                chat_input_send.setAttribute('disabled', true);
+                chat_input_send.classList.remove('enabled');
+                if (chat_input.value.length <= 0) {
+                    return;
                 }
+                // Send the message. Pass in the chat_input.value
+                parent.send_message(chat_input.value);
+                // Clear the chat input box
+                chat_input.value = '';
+                // Focus on the input just after
+                chat_input.focus();
             };
-            var chat_logout_container = document.createElement('div');
-            chat_logout_container.setAttribute('id', 'chat_logout_container');
-
-            var chat_logout = document.createElement('button');
-            chat_logout.setAttribute('id', 'chat_logout');
-            chat_logout.textContent = `${parent.get_name()} • logout`;
-            // "Logout" is really just deleting the name from the localStorage
-            chat_logout.onclick = function () {
-                localStorage.removeItem("name");
-                // Go back to home page
-                parent.home();
-            };
-
-            chat_logout_container.append(chat_logout);
-            chat_input_container.append(chat_input, chat_input_send);
-            chat_inner_container.append(chat_content_container, chat_input_container, chat_logout_container);
-            chat_container.append(chat_inner_container);
-            document.body.append(chat_container);
-            // After creating the chat. We immediately create a loading circle in the 'chat_content_container'
-            parent.create_load('chat_content_container');
-            // then we "refresh" and get the chat data from Firebase
-            // parent.refresh_chat(); Removed to fix the issue of chat not loading
+        } else {
+            chat_input_send.classList.remove('enabled');
         }
+    };
+
+    var chat_logout_container = document.createElement('div');
+    chat_logout_container.setAttribute('id', 'chat_logout_container');
+
+    var chat_logout = document.createElement('button');
+    chat_logout.setAttribute('id', 'chat_logout');
+    chat_logout.textContent = `${parent.get_name()} • logout`;
+    // "Logout" is really just deleting the name from the localStorage
+    chat_logout.onclick = function () {
+        localStorage.removeItem("name");
+        // Go back to home page
+        parent.home();
+    };
+
+    chat_logout_container.append(chat_logout);
+    chat_input_container.append(chat_input, chat_input_send);
+    chat_inner_container.append(chat_content_container, chat_input_container, chat_logout_container);
+    chat_container.append(chat_inner_container);
+    document.body.append(chat_container);
+    // After creating the chat, immediately load the chat content
+    parent.refresh_chat();
+}
 
         send_message(message) {
             var parent = this;
