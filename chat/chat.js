@@ -358,7 +358,7 @@ refresh_chat() {
 }
 
         // Function to initialize the server selector dropdown
-        initializeServerSelector() {
+       /* initializeServerSelector() {
             // Create the select element for the server selector dropdown
             var serverSelector = document.createElement('select');
             serverSelector.setAttribute('id', 'serverSelector');
@@ -391,7 +391,7 @@ serverSelector.addEventListener('change', function () {
             document.getElementById("serverboxheader").textContent = `${currentServer} Box`; // Update the h1 element
         }
     }
-
+*/
     // Create an instance of the MEME_CHAT class
     var chat = new MEME_CHAT();
 
