@@ -255,10 +255,19 @@ document.addEventListener('DOMContentLoaded', function () {
     // Get the sender's name
     var senderName = parent.get_name();
 
-    // Get the firebase database reference for the current server
-    db.ref(`chats/${currentServer}`).once('value', function (message_object) {
-        // This index is important. It will help organize the chat in order
-        var index = parseFloat(message_object.numChildren()) + 1;
+    // Check if the sender's name already exists in the database
+    db.ref(`chats/${currentServer}`).once('value', function (messages_object) {
+        var messages = Object.values(messages_object.val());
+        for (var i = 0; i < messages.length; i++) {
+            if (messages[i].name === senderName) {
+                // If a message with the same name is found, block the message
+                alert("Another user with the same name is already in the chat. Please choose a different name.");
+                return;
+            }
+        }
+
+        // If no duplicate name is found, proceed to send the message
+        var index = parseFloat(messages_object.numChildren()) + 1;
         db.ref(`chats/${currentServer}/message_${index}`).set({
             name: senderName,
             message: message,
