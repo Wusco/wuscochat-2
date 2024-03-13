@@ -30,6 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
         chat() {
             this.create_title();
             this.create_chat();
+            this.create_left_sidebar();
+            this.create_right_sidebar();
         }
 
         // create_title() is used to create the title
@@ -81,22 +83,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     join_button.classList.add('enabled');
                     // Allow the user to click the button
                     join_button.onclick = function () {
-    console.log("Join button clicked");
-    var username = join_input.value.trim();
-    if (username.length > 2) {
-        alert("Username:", username);
-        parent.save_name(username);
-        alert("Name saved to local storage");
-        join_container.remove();
-        alert("Join container removed");
-        parent.create_chat();
-        alert("Chat interface created");
-        location.reload();
-        alert("Page reloaded");
-    } else {
-        alert("Username must be at least 3 characters long.");
-    }
-};
+                        // Save the name to local storage. Passing in
+                        // the join_input.value
+                        parent.save_name(join_input.value);
+                        // Remove the join_container. So the site doesn't look weird.
+                        join_container.remove();
+                        // parent = this. But it is not the join_button
+                        // It is (MEME_CHAT = this).
+                        parent.create_chat();
+                    };
                 } else {
                     // If the join_input is empty then turn off the
                     // join button
@@ -110,6 +105,13 @@ document.addEventListener('DOMContentLoaded', function () {
             join_inner_container.append(join_input_container, join_button_container);
             join_container.append(join_inner_container);
             document.body.append(join_container);
+        }
+
+        // Save name to local storage
+        save_name(name) {
+            console.log("Attempting to save name:", name);
+            localStorage.setItem('name', name);
+            console.log("Name saved to local storage:", name);
         }
 
         // create_load() creates a loading circle that is used in the chat container
@@ -129,6 +131,39 @@ document.addEventListener('DOMContentLoaded', function () {
 
             loader_container.append(loader);
             container.append(loader_container);
+        }
+
+        create_left_sidebar() {
+            var leftSidebar = document.createElement('div');
+            leftSidebar.setAttribute('id', 'left-sidebar');
+            leftSidebar.setAttribute('class', 'meme-container');
+            // add what you want here enzo
+            leftSidebar.innerHTML = '<iframe src="https://wuscoadvertisement-485877.netlify.app/" style="width: 200px; padding: 0px; height: calc(100% - 10px); overflow:hidden; position: fixed;"></iframe>';
+            leftSidebar.classList.add('left-sidebar');
+            document.body.append(leftSidebar);
+        }
+
+        create_right_sidebar() {
+            var rightSidebar = document.createElement('div');
+            rightSidebar.setAttribute('id', 'right-sidebar');
+            rightSidebar.innerHTML = 'WuscoChat Rules:';
+            rightSidebar.classList.add('right-sidebar');
+
+            var rules = document.createElement('ul');
+            // add your rules here
+            rules.innerHTML = `
+          <br>
+          <li>Rule 1: No spamming or flooding the chat.</li>
+          <li>Rule 2: No text art</li>
+          <button class="panic" onclick="location.href='https://classroom.google.com'">
+            Panic Button
+          </button>
+
+              `;
+
+            rightSidebar.append(rules);
+
+            document.body.append(rightSidebar);
         }
 
         // create_chat() creates the chat container and stuff
@@ -209,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // After creating the chat. We immediately create a loading circle in the 'chat_content_container'
             parent.create_load('chat_content_container');
             // then we "refresh" and get the chat data from Firebase
-            parent.refresh_chat();
+            // parent.refresh_chat(); Removed to fix the issue of chat not loading
         }
 
         send_message(message) {
@@ -328,9 +363,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Initialize the MEME_CHAT class
+    // Create an instance of the MEME_CHAT class
     var chat = new MEME_CHAT();
 
-    // Load the home page when the DOM content is loaded
-    chat.home();
+    // Check if a user is logged in and show the appropriate page
+    if (localStorage.getItem('name') != null) {
+        chat.chat();
+    } else {
+        chat.home();
+    }
 });
