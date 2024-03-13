@@ -81,13 +81,18 @@ document.addEventListener('DOMContentLoaded', function () {
                     join_button.classList.add('enabled');
                     // Allow the user to click the button
                     join_button.onclick = function () {
-    alert("Join button clicked"); // Add logging to check if the button click event is triggered
+    console.log("Join button clicked");
     var username = join_input.value.trim();
     if (username.length > 2) {
+        alert("Username:", username);
         parent.save_name(username);
+        alert("Name saved to local storage");
         join_container.remove();
+        alert("Join container removed");
         parent.create_chat();
+        alert("Chat interface created");
         location.reload();
+        alert("Page reloaded");
     } else {
         alert("Username must be at least 3 characters long.");
     }
